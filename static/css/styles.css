@@ -1019,6 +1019,56 @@ body.app-mode {
 }
 
 .terminal-content::-webkit-scrollbar-thumb {
-    background: #333;
-    border-radius: 2px;
-}
+
+    /* --- Visual Polish Patch (Leaderboard Cards & Feed Spacing) --- */
+
+    /* Leaderboard Cards */
+    .prime-board {
+        background: transparent !important;
+        border: none !important;
+        padding: 0 !important;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .fund-row {
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 12px !important;
+        margin-bottom: 0 !important;
+        /* Managed by flex gap */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .fund-name {
+        font-size: 1rem;
+        margin-bottom: 8px;
+    }
+
+    /* Thicker Progress Bars */
+    .fund-bar-bg {
+        height: 8px !important;
+        background: rgba(255, 255, 255, 0.08) !important;
+        border-radius: 4px !important;
+    }
+
+    .fund-bar-fill {
+        border-radius: 4px !important;
+        min-width: 4px;
+    }
+
+    /* Ensure visibility even if small */
+
+    /* Feed Spacing */
+    .transactions-list {
+        gap: 12px !important;
+    }
+
+    .trx-item {
+        padding: 10px !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.02);
+    }
+
+    /* End of Visual Patch */
