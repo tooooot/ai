@@ -60,6 +60,18 @@
             </div>
         </div>
 
+        <!-- AI Logic Terminal (Transparency Engine) -->
+        <div class="logic-terminal-wrap">
+            <div class="terminal-header">
+                <span class="blink-dot"></span>
+                LIVE AI LOGIC STREAM (v2.4 Core)
+            </div>
+            <div class="terminal-content" id="ai-logic-feed">
+                <div class="log-line"><span class="cmd">> SYSTEM:</span> Connecting to Market Data Stream...</div>
+                <div class="log-line"><span class="cmd">> CORE:</span> Loading 10 Strategy Modules...</div>
+            </div>
+        </div>
+
         <!-- 2. Prime Leaderboard (Top Strategies) -->
         <section class="section-title">
             <h3>أداء المحافظ الاستثمارية</h3>
@@ -144,10 +156,38 @@
 
                 renderLeaderboard(data.leaderboard);
                 renderFeed(data.recent_trades);
+                renderLogicTerminal(data.leaderboard);
                 lucide.createIcons();
 
             } catch (error) {
                 console.error("Data Stream Error", error);
+            }
+        }
+
+        let lastProcessedLogs = {};
+
+        function renderLogicTerminal(strategies) {
+            const terminal = document.getElementById('ai-logic-feed');
+
+            strategies.forEach(s => {
+                const lastLog = s.last_log || "Initializing...";
+                if (lastProcessedLogs[s.name] !== lastLog) {
+                    lastProcessedLogs[s.name] = lastLog;
+
+                    // Add new log line
+                    const line = document.createElement('div');
+                    line.className = 'log-line';
+                    line.innerHTML = `<span class="cmd">> ${s.name}:</span> ${lastLog}`;
+                    terminal.appendChild(line);
+
+                    // Auto scroll
+                    terminal.scrollTop = terminal.scrollHeight;
+                }
+            });
+
+            // Cleanup old lines
+            while (terminal.children.length > 50) {
+                terminal.removeChild(terminal.firstChild);
             }
         }
 

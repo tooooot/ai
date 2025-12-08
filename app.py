@@ -39,6 +39,10 @@ def simulation_loop():
             portfolio_state = portfolio_manager.portfolios[active_strategy]
             decision = ai_trader.get_decision(active_strategy, portfolio_state)
             
+            if decision:
+                # Always log the reasoning, whether BUY, SELL, or HOLD
+                portfolio_manager.update_log(active_strategy, f"[{decision['action']}] {decision.get('reason', '')}")
+            
             if decision and decision['action'] == 'BUY':
                 # Execute Buy
                 success, msg = portfolio_manager.execute_trade(

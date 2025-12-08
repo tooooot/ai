@@ -15,8 +15,13 @@ class PortfolioManager:
                 "holdings": {}, # symbol -> quantity
                 "total_value": initial_capital, # cash + market_value_of_holdings
                 "history": [],
-                "active_trades": [] # List of open positions with goals
+                "active_trades": [], # List of open positions with goals
+                "last_log": "جاري تهيئة النظام..." # Real-time thinking log
             }
+
+    def update_log(self, strategy_name, message):
+        if strategy_name in self.portfolios:
+            self.portfolios[strategy_name]["last_log"] = message
 
     def execute_trade(self, strategy_name, action, symbol, price, quantity, reasoning, goals, extra_data={}):
         """
@@ -90,6 +95,7 @@ class PortfolioManager:
             summary.append({
                 "name": name,
                 "value": data["total_value"],
+                "last_log": data.get("last_log", "..."),
                 "return": ((data["total_value"] - 100000) / 100000) * 100
             })
         # Sort by return DESC
