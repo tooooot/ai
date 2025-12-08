@@ -3,49 +3,108 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>منصة المتداول الذكي</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AI WEALTH | المستقبل المالي</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <style>
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: radial-gradient(circle, #1a202c 0%, #0b0e11 100%);
-        }
-
-        .btn {
-            padding: 15px 40px;
-            background: var(--accent-green);
-            color: #000;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 30px;
-            font-size: 1.2rem;
-            margin-top: 30px;
-            transition: transform 0.2s;
-        }
-
-        .btn:hover {
-            transform: scale(1.05);
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
-<body>
-    <div class="hero">
-        <h1 style="font-size: 3.5rem; margin-bottom: 20px;">
-            هل يغلب الذكاء الاصطناعي السوق؟ 🤖
-        </h1>
-        <p style="font-size: 1.5rem; color: var(--text-secondary); max-width: 600px;">
-            شاهد 10 استراتيجيات AI تتنافس في السوق السعودي في بث مباشر.
-        </p>
-        <div style="margin-top: 40px;">
-            <a href="/live" class="btn">شاهد التحدي المباشر 🔴</a>
+<body class="bank-theme landing-page">
+
+    <!-- Navbar -->
+    <nav class="landing-nav">
+        <div class="logo">AI WEALTH</div>
+        <div class="nav-links">
+            <a href="#features">المميزات</a>
+            <a href="/app" class="nav-btn-highlight">دخول الأعضاء</a>
         </div>
-    </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="landing-hero">
+        <div class="hero-content">
+            <span class="badge-new">الجيل الجديد من الاستثمار</span>
+            <h1>
+                دع الذكاء الاصطناعي <br>
+                <span class="highlight-gold">يدير ثروتك</span>
+            </h1>
+            <p class="hero-desc">
+                نظام آلي متكامل يحلل، يقرر، وينفذ الصفقات في السوق السعودي بدقة متناهية.
+                شاهد الأداء الحي أو انضم للنخبة.
+            </p>
+
+            <div class="cta-group">
+                <a href="/live" class="btn-primary-lg">
+                    <i data-lucide="tv"></i>
+                    شاهد البث المباشر
+                </a>
+                <a href="/app" class="btn-secondary-lg">
+                    <i data-lucide="smartphone"></i>
+                    تطبيق المشتركين
+                </a>
+            </div>
+
+            <div class="stats-row">
+                <div class="stat-item">
+                    <span class="stat-num">10+</span>
+                    <span class="stat-lbl">استراتيجيات</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-num">0ms</span>
+                    <span class="stat-lbl">تأخير لحظي</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-num">24/7</span>
+                    <span class="stat-lbl">مراقبة السوق</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Abstract Visual -->
+        <div class="hero-visual">
+            <div class="glow-circle"></div>
+            <div class="grid-lines"></div>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <div class="section-header-center">
+            <h2>لماذا AI Wealth؟</h2>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="f-icon"><i data-lucide="cpu"></i></div>
+                <h3>محرك ذكي</h3>
+                <p>خوارزميات متقدمة تتعلم من السوق وتتطور يومياً.</p>
+            </div>
+            <div class="feature-card">
+                <div class="f-icon"><i data-lucide="shield-check"></i></div>
+                <h3>شفافية مطلقة</h3>
+                <p>شاهد "منطق القرار" قبل التنفيذ. لا صناديق سوداء.</p>
+            </div>
+            <div class="feature-card">
+                <div class="f-icon"><i data-lucide="pie-chart"></i></div>
+                <h3>تنوع استراتيجي</h3>
+                <p>من القناص المضارب إلى الرزين المستثمر. اختر ما يناسبك.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="landing-footer">
+        <p>&copy; 2025 AI Wealth. جميع الحقوق محفوظة.</p>
+        <p class="disclaimer">تنبيه: الاستثمار في الأسهم ينطوي على مخاطر.</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 
 </html>
