@@ -436,25 +436,15 @@ body.app-mode {
     transition: transform 0.1s;
 }
 
-.bank-btn:active {
-    transform: scale(0.98);
-}
-
-/* --- Private Wealth App Styles --- */
-
-/* Login Overlay */
-.login-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: var(--bg-dark);
-    z-index: 10000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: opacity 0.5s;
+left: 0;
+right: 0;
+bottom: 0;
+background: var(--bg-dark);
+z-index: 10000;
+display: flex;
+justify-content: center;
+align-items: center;
+transition: opacity 0.5s;
 }
 
 .login-content {
@@ -1072,10 +1062,7 @@ body.app-mode {
 .trx-item {
     padding: 10px !important;
     border-top: 1px solid rgba(255, 255, 255, 0.02);
-}
-
-
-/* --- Landing Page Styles (Gateway) --- */
+}/* --- Landing Page Styles (Gateway) --- */
 .landing-page {
     overflow-y: auto !important;
     /* Enable scroll for landing */
@@ -1297,4 +1284,26 @@ body.app-mode {
     color: var(--text-muted);
     font-size: 0.9rem;
     border-top: 1px solid var(--border-color);
+}
+
+/* --- Heatmap Styles --- */
+.heatmap-wrapper {
+    margin-bottom: 20px;
+}
+
+.section-title-mini {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.heatmap-container {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 10px;
+    height: 220px;
+    /* Chart container height */
+    overflow: hidden;
 }

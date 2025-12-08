@@ -10,6 +10,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=IBM+Plex+Sans+Arabic:wght@300;400;600&display=swap"
         rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -72,6 +73,12 @@
             </div>
         </div>
 
+        <!-- Heatmap Section -->
+        <div class="heatmap-wrapper">
+            <div class="section-title-mini">خارطة السيولة (Market Heatmap)</div>
+            <div id="market-heatmap" class="heatmap-container"></div>
+        </div>
+
         <!-- 2. Prime Leaderboard (Top Strategies) -->
         <section class="section-title">
             <h3>أداء المحافظ الاستثمارية</h3>
@@ -126,18 +133,15 @@
 
         function rotateExplainer() {
             const track = document.getElementById('explainer-track');
-            // Check if we can just fade text or replace html
-            // Simple approach: Fade Out -> Change Text -> Fade In
             track.style.opacity = '0';
 
             setTimeout(() => {
                 currentExplainerIdx = (currentExplainerIdx + 1) % explainerTexts.length;
                 track.innerHTML = `<div class="carousel-item">${explainerTexts[currentExplainerIdx]}</div>`;
                 track.style.opacity = '1';
-            }, 500); // Wait for fade out
+            }, 500);
         }
-
-        setInterval(rotateExplainer, 5000); // Rotate every 5 seconds
+        setInterval(rotateExplainer, 5000);
 
         // --- Interactions ---
         document.getElementById('enable-audio-btn').addEventListener('click', () => {
@@ -148,6 +152,82 @@
             speak("تم تفعيل نظام التحليل المالي. أهلاً بكم في التغطية الحية.", "system");
         });
 
+        // --- Heatmap Logic ---
+        let heatmapChart = null;
+
+        function initHeatmap() {
+            const options = {
+                series: [{ data: [] }],
+                legend: { show: false },
+                chart: {
+                    type: 'treemap',
+                    height: 200,
+                    toolbar: { show: false },
+                    fontFamily: 'Tajawal, sans-serif'
+                },
+                title: { text: '' },
+                dataLabels: {
+                    enabled: true,
+                    style: { fontSize: '12px', fontWeight: 'bold' },
+                    formatter: function (text, op) {
+                        return [text, op.value.toFixed(1) + "%"];
+                    },
+                    offsetY: -4
+                },
+                plotOptions: {
+                    treemap: {
+                        distributed: true,
+                        enableShades: true,
+                        shadeIntensity: 0.5,
+                        reverseNegativeShade: true,
+                        colorScale: {
+                            ranges: [
+                                { from: -100, to: -0.01, color: '#ef4444' }, // Red for loss
+                                { from: 0, to: 100, color: '#10b981' }      // Green for profit
+                            ]
+                        }
+                    }
+                },
+                theme: { mode: 'dark' },
+                grid: { show: false } // Cleaner look
+            };
+
+            const el = document.querySelector("#market-heatmap");
+            if (el) {
+                heatmapChart = new ApexCharts(el, options);
+                heatmapChart.render();
+            }
+        }
+
+        function updateHeatmap(strategies) {
+            if (!heatmapChart) return;
+
+            // Map strategies to Treemap format: { x: 'Name', y: Value (Size) }
+            // Note: Color is usually auto based on value in simple Treemap, 
+            // but we want Size=TotalValue, Color=Return. 
+            // ApexCharts basic Treemap uses one value for both size/color usually, unless custom logic.
+            // Simplified Approach: Use Return% as the MAIN value (y) so size represents Performance Magnitude.
+            // Or better: Use Size so big portfolios take more space.
+
+            // For now, let's map Y to |Return| + Base so no 0 size.
+            // Actually, let's use Total Value for size. And a custom color based on return logic is tricky without advanced config.
+            // Let's stick to Size = Value. And we rely on the colorScale above? 
+            // Wait, colorScale applies to 'y'. If y is Value (always positive), it will be all green.
+
+            // Fix: We need custom colors per data point.
+            const data = strategies.map(s => {
+                const color = s.return >= 0 ? '#10b981' : '#ef4444';
+                return {
+                    x: s.name,
+                    y: s.value, // Size based on portfolio value
+                    fillColor: color // Explicit color override
+                };
+            });
+
+            heatmapChart.updateSeries([{ data: data }]);
+        }
+
+
         // --- Core Logic ---
         async function fetchLiveData() {
             try {
@@ -157,6 +237,11 @@
                 renderLeaderboard(data.leaderboard);
                 renderFeed(data.recent_trades);
                 renderLogicTerminal(data.leaderboard);
+
+                // Update Heatmap
+                if (!heatmapChart) initHeatmap();
+                updateHeatmap(data.leaderboard);
+
                 lucide.createIcons();
 
             } catch (error) {
@@ -174,18 +259,14 @@
                 if (lastProcessedLogs[s.name] !== lastLog) {
                     lastProcessedLogs[s.name] = lastLog;
 
-                    // Add new log line
                     const line = document.createElement('div');
                     line.className = 'log-line';
                     line.innerHTML = `<span class="cmd">> ${s.name}:</span> ${lastLog}`;
                     terminal.appendChild(line);
-
-                    // Auto scroll
                     terminal.scrollTop = terminal.scrollHeight;
                 }
             });
 
-            // Cleanup old lines
             while (terminal.children.length > 50) {
                 terminal.removeChild(terminal.firstChild);
             }
@@ -193,7 +274,6 @@
 
         function renderLeaderboard(strategies) {
             const container = document.getElementById('prime-board');
-            // Sort by return
             const sorted = [...strategies].sort((a, b) => b.return - a.return);
 
             container.innerHTML = sorted.map((item, index) => {
@@ -262,12 +342,10 @@
         function speak(text, persona) {
             if (!('speechSynthesis' in window)) return;
             window.speechSynthesis.cancel();
-
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = 'ar-SA';
             utterance.rate = 0.9;
             utterance.pitch = 0.8;
-
             window.speechSynthesis.speak(utterance);
         }
 
@@ -280,8 +358,9 @@
             correctLevel: QRCode.CorrectLevel.H
         });
 
+        // Initialize
+        fetchLiveData(); // Initial fetch
         setInterval(fetchLiveData, 2000);
-        fetchLiveData();
 
     </script>
 </body>
