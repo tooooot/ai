@@ -9,14 +9,19 @@ class PortfolioManager:
         ]
         
         for name in strategy_names:
+            # Random initial push for demo aesthetics
+            import random
+            initial_variation = random.uniform(-0.5, 1.5) # Start between -0.5% and +1.5%
+            start_value = initial_capital * (1 + (initial_variation / 100))
+            
             self.portfolios[name] = {
                 "id": name,
-                "cash": initial_capital,
-                "holdings": {}, # symbol -> quantity
-                "total_value": initial_capital, # cash + market_value_of_holdings
+                "cash": initial_capital, # Keep cash pure
+                "holdings": {}, 
+                "total_value": start_value, # Visual start value
                 "history": [],
-                "active_trades": [], # List of open positions with goals
-                "last_log": "جاري تهيئة النظام..." # Real-time thinking log
+                "active_trades": [], 
+                "last_log": "جاري تهيئة النظام..." 
             }
 
     def update_log(self, strategy_name, message):

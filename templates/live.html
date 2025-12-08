@@ -10,22 +10,15 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=IBM+Plex+Sans+Arabic:wght@300;400;600&display=swap"
         rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body class="bank-theme">
 
-    <!-- Audio Consent (Professional) -->
-    <div id="audio-overlay" class="audio-overlay">
-        <div class="overlay-card">
-            <div class="bank-logo-icon">🏛️</div>
-            <h2>تفعيل النظام الصوتي</h2>
-            <p>يرجى تفعيل المذيع الآلي لمتابعة التحليلات الفورية.</p>
-            <button id="enable-audio-btn" class="bank-btn">تفعيل النظام</button>
-        </div>
-    </div>
+    <!-- Audio Overlay Removed -->
+    <!-- System will attempt auto-play, browser policy permitting -->
 
     <div class="tiktok-container">
 
@@ -74,10 +67,7 @@
         </div>
 
         <!-- Heatmap Section -->
-        <div class="heatmap-wrapper">
-            <div class="section-title-mini">خارطة السيولة (Market Heatmap)</div>
-            <div id="market-heatmap" class="heatmap-container"></div>
-        </div>
+
 
         <!-- 2. Prime Leaderboard (Top Strategies) -->
         <section class="section-title">
@@ -144,88 +134,15 @@
         setInterval(rotateExplainer, 5000);
 
         // --- Interactions ---
-        document.getElementById('enable-audio-btn').addEventListener('click', () => {
-            const overlay = document.getElementById('audio-overlay');
-            overlay.style.opacity = '0';
-            setTimeout(() => overlay.remove(), 500);
+        // --- Interactions ---
+        // Auto-Enable best effort
+        setTimeout(() => {
             audioEnabled = true;
-            speak("تم تفعيل نظام التحليل المالي. أهلاً بكم في التغطية الحية.", "system");
-        });
+            speak("بدء البث الحي للذكاء الاصطناعي.", "system");
+        }, 1000);
 
         // --- Heatmap Logic ---
-        let heatmapChart = null;
 
-        function initHeatmap() {
-            const options = {
-                series: [{ data: [] }],
-                legend: { show: false },
-                chart: {
-                    type: 'treemap',
-                    height: 200,
-                    toolbar: { show: false },
-                    fontFamily: 'Tajawal, sans-serif'
-                },
-                title: { text: '' },
-                dataLabels: {
-                    enabled: true,
-                    style: { fontSize: '12px', fontWeight: 'bold' },
-                    formatter: function (text, op) {
-                        return [text, op.value.toFixed(1) + "%"];
-                    },
-                    offsetY: -4
-                },
-                plotOptions: {
-                    treemap: {
-                        distributed: true,
-                        enableShades: true,
-                        shadeIntensity: 0.5,
-                        reverseNegativeShade: true,
-                        colorScale: {
-                            ranges: [
-                                { from: -100, to: -0.01, color: '#ef4444' }, // Red for loss
-                                { from: 0, to: 100, color: '#10b981' }      // Green for profit
-                            ]
-                        }
-                    }
-                },
-                theme: { mode: 'dark' },
-                grid: { show: false } // Cleaner look
-            };
-
-            const el = document.querySelector("#market-heatmap");
-            if (el) {
-                heatmapChart = new ApexCharts(el, options);
-                heatmapChart.render();
-            }
-        }
-
-        function updateHeatmap(strategies) {
-            if (!heatmapChart) return;
-
-            // Map strategies to Treemap format: { x: 'Name', y: Value (Size) }
-            // Note: Color is usually auto based on value in simple Treemap, 
-            // but we want Size=TotalValue, Color=Return. 
-            // ApexCharts basic Treemap uses one value for both size/color usually, unless custom logic.
-            // Simplified Approach: Use Return% as the MAIN value (y) so size represents Performance Magnitude.
-            // Or better: Use Size so big portfolios take more space.
-
-            // For now, let's map Y to |Return| + Base so no 0 size.
-            // Actually, let's use Total Value for size. And a custom color based on return logic is tricky without advanced config.
-            // Let's stick to Size = Value. And we rely on the colorScale above? 
-            // Wait, colorScale applies to 'y'. If y is Value (always positive), it will be all green.
-
-            // Fix: We need custom colors per data point.
-            const data = strategies.map(s => {
-                const color = s.return >= 0 ? '#10b981' : '#ef4444';
-                return {
-                    x: s.name,
-                    y: s.value, // Size based on portfolio value
-                    fillColor: color // Explicit color override
-                };
-            });
-
-            heatmapChart.updateSeries([{ data: data }]);
-        }
 
 
         // --- Core Logic ---
@@ -238,9 +155,7 @@
                 renderFeed(data.recent_trades);
                 renderLogicTerminal(data.leaderboard);
 
-                // Update Heatmap
-                if (!heatmapChart) initHeatmap();
-                updateHeatmap(data.leaderboard);
+
 
                 lucide.createIcons();
 

@@ -18,18 +18,24 @@ class NewsEngine:
         Stores them in history for verification.
         """
         news_items = []
-        # Simulation of news including Twitter source simulation
+        # Enhanced Simulation with Market Context
         simulated_news = [
-            {"source": "Argaam", "title": "أرباح ربع سنوية قوية لقطاع البتروكيماويات تدعم السوق.", "url": "https://argaam.com/example1"},
-            {"source": "AlRajhi Capital", "title": "توقعات بارتفاع الفائدة تضغط على أسهم البنوك.", "url": "https://alrajhi-capital.com/research"},
-            {"source": "SPA (Twitter)", "title": "ولي العهد يعلن عن مبادرات استثمارية جديدة.", "url": "https://twitter.com/spagov/status/123"},
-            {"source": "Reuters", "title": "انخفاض طفيف في أسعار النفط يؤثر على أرامكو.", "url": "https://reuters.com/oil"},
-            {"source": "Tadawul", "title": "قطاع الأسمنت يشهد انتعاشاً في الطلب المحلي.", "url": "https://tadawul.com.sa/cement"}
+            {"source": "Argaam", "title": "أرباح ربع سنوية قوية لقطاع البتروكيماويات تفوق التوقعات.", "url": "#"},
+            {"source": "AlRajhi Capital", "title": "توقعات بارتفاع الفائدة قد تضغط على هوامش ربحية البنوك.", "url": "#"},
+            {"source": "SPA (Twitter)", "title": "ولي العهد يعلن عن مبادرات استثمارية ضخمة في قطاع التكنولوجيا.", "url": "#"},
+            {"source": "Reuters", "title": "ارتفاع مفاجئ في أسعار النفط يدفعه لتجاوز 90 دولاراً.", "url": "#"},
+            {"source": "Tadawul", "title": "قطاع الأسمنت يشهد انتعاشاً ملحوظاً بدعم من المشاريع الكبرى.", "url": "#"},
+            {"source": "Bloomberg", "title": "صناديق عالمية تزيد من وزن السوق السعودي في مؤشراتها.", "url": "#"},
+            {"source": "CNBC Arabia", "title": "مخاوف من ركود عالمي تسيطر على معنويات المتداولين.", "url": "#"}
         ]
+        
+        # Pick 3 random items to keep feed fresh but not overwhelming
+        import random
+        selected_news = random.sample(simulated_news, 3)
         
         from datetime import datetime
         
-        for item in simulated_news:
+        for item in selected_news:
             sentiment = self.analyze_sentiment(item["title"])
             
             news_obj = {
@@ -42,9 +48,10 @@ class NewsEngine:
                 "score": 1 if sentiment == "Positive" else -1 if sentiment == "Negative" else 0
             }
             
-            news_items.append(news_obj)
-            # Add to archive (simple in-memory dedup could be good, but for demo just append)
-            self.archive.insert(0, news_obj)
+            # Avoid exact duplicates in top 5
+            if not any(n['title'] == news_obj['title'] for n in self.archive[:5]):
+                news_items.append(news_obj)
+                self.archive.insert(0, news_obj)
             
         return news_items
 
@@ -53,10 +60,17 @@ class NewsEngine:
 
     def analyze_sentiment(self, text):
         """
-        Analyzes Arabic text sentiment.
+        Analyzes Arabic text sentiment with expanded vocabulary.
         """
-        positive_keywords = ['ارتفاع', 'نمو', 'أرباح', 'إيجابي', 'صعود', 'قوية', 'انتعاش', 'صفقة', 'مبادرات', 'استثمار']
-        negative_keywords = ['انخفاض', 'خسارة', 'تراجع', 'سلبي', 'هبوط', 'ضعف', 'ضغط']
+        positive_keywords = [
+            'ارتفاع', 'نمو', 'أرباح', 'إيجابي', 'صعود', 'قوية', 'انتعاش', 
+            'صفقة', 'مبادرات', 'استثمار', 'مكاسب', 'توسع', 'قفزة', 'تدشين', 
+            'زيادة', 'تجاوز'
+        ]
+        negative_keywords = [
+            'انخفاض', 'خسارة', 'تراجع', 'سلبي', 'هبوط', 'ضعف', 'ضغط', 
+            'مخاوف', 'انهيار', 'تعثر', 'ركود', 'أزمة', 'عقوبات'
+        ]
         
         score = 0
         for word in positive_keywords:

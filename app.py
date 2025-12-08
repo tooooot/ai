@@ -111,6 +111,10 @@ def mobile_app_view():
 def verify_view():
     return render_template('verify.html')
 
+@app.route('/test-devices')
+def device_lab():
+    return render_template('test_devices.html')
+
 # --- API Endpoints ---
 
 @app.route('/api/live_data')

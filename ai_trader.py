@@ -41,14 +41,15 @@ class AITrader:
         
         if not price: return None
         
-        # Simple Logic: Buy if we have cash and don't own it
-        if portfolio["cash"] > 5000 and symbol not in portfolio["holdings"]:
+        # DEMO MODE: Aggressive Entry
+        # Buy if we don't own it OR if we own it but have plenty of cash (DCA)
+        if portfolio["cash"] > 2000:
             return {
                 "action": "BUY",
                 "symbol": symbol,
                 "quantity": 10,
                 "price": price,
-                "reason": "سهم قيادي مستقر. مكرر الربحية ضمن النطاق الآمن. فرصة جيدة للتجميع.",
+                "reason": "سهم قيادي مستقر. مكرر الربحية ضمن النطاق الآمن. فرصة جيدة للتجميع (Demo Entry).",
                 "verification_link": "https://www.saudiexchange.sa/wps/portal/tadawul/market-participants/issuers/issuers-directory/company-details/!ut/p/z1/?companySymbol=1120",
                 "goals": {
                     "target_price": price * 1.05, # 5% target
