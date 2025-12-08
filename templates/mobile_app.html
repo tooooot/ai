@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AI Private Wealth</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="bank-theme app-mode">
+
+    <!-- 1. Secure Login Overlay -->
+    <div id="login-overlay" class="login-overlay">
+        <div class="login-content">
+            <div class="biometric-icon">
+                <i data-lucide="scan-face" class="icon-xl"></i>
+            </div>
+            <h2>AI WEALTH</h2>
+            <p>جاري التحقق من الهوية...</p>
+            <div class="loader-line"></div>
+        </div>
+    </div>
+
+    <!-- 2. Main App Container -->
+    <div class="app-container hidden" id="main-app">
+
+        <!-- Header -->
+        <header class="app-header">
+            <div class="user-info">
+                <div class="avatar">MA</div>
+                <div>
+                    <span class="greeting">مرحباً، محمد</span>
+                    <span class="status">عضو ذهبي 🌟</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="icon-btn"><i data-lucide="bell"></i></button>
+            </div>
+        </header>
+
+        <!-- Balance Card -->
+        <section class="balance-card">
+            <span class="label">إجمالي المحفظة</span>
+            <div class="amount">245,350.00 <span class="currency">SAR</span></div>
+            <div class="change positive">
+                <i data-lucide="trending-up"></i>
+                <span>+2.4% (اليوم)</span>
+            </div>
+        </section>
+
+        <!-- Strategy Carousel -->
+        <section class="section-header">
+            <h3>استراتيجياتك النشطة</h3>
+            <a href="#" class="see-all">عرض الكل</a>
+        </section>
+
+        <div class="strategy-carousel" id="strategy-list">
+            <!-- Injected via JS -->
+            <div class="loading-spinner small"></div>
+        </div>
+
+        <!-- AI Insights (Feed) -->
+        <section class="section-header">
+            <h3>تحليلات الذكاء الاصطناعي</h3>
+        </section>
+
+        <div class="insights-feed" id="insights-feed">
+            <!-- Injected via JS -->
+        </div>
+
+        <!-- Chat button (Floating) -->
+        <button class="fab-chat" onclick="openChat()">
+            <i data-lucide="message-square"></i>
+            <span>المستشار الآلي</span>
+        </button>
+
+        <!-- Bottom Nav -->
+        <nav class="bottom-nav">
+            <a href="#" class="nav-item active">
+                <i data-lucide="home"></i>
+                <span>الرئيسية</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i data-lucide="pie-chart"></i>
+                <span>المحفظة</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i data-lucide="arrow-left-right"></i>
+                <span>التداول</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i data-lucide="user"></i>
+                <span>حسابي</span>
+            </a>
+        </nav>
+
+    </div>
+
+    <!-- Chat Modal -->
+    <div id="chat-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>المستشار الذكي</h3>
+                <button onclick="closeChat()" class="close-btn"><i data-lucide="x"></i></button>
+            </div>
+            <div id="chat-history" class="chat-history">
+                <div class="msg bot">
+                    مرحباً بك يا محمد. أنا مستشارك المالي الذكي. كيف يمكنني مساعدتك في استراتيجياتك اليوم؟
+                </div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="اكتب استفسارك...">
+                <button onclick="sendMessage()"><i data-lucide="send"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Init ---
+        lucide.createIcons();
+
+        // Simulate Biometric Login
+        setTimeout(() => {
+            document.getElementById('login-overlay').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('login-overlay').remove();
+                document.getElementById('main-app').classList.remove('hidden');
+                loadStrategies();
+                lucide.createIcons();
+            }, 500);
+        }, 2000);
+
+        // --- Data Loading ---
+        async function loadStrategies() {
+            try {
+                // Here we would ideally fetch summary of all strategies. 
+                // reusing /api/live_data for summary is easiest
+                const res = await fetch('/api/live_data');
+                const data = await res.json();
+
+                renderStrategies(data.leaderboard);
+                renderInsights(data.recent_trades);
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        function renderStrategies(list) {
+            const container = document.getElementById('strategy-list');
+            // Sort by user preference or performance
+            container.innerHTML = list.map(s => {
+                const isPos = s.return >= 0;
+                return `
+                <div class="strategy-card-item">
+                    <div class="st-header">
+                        <div class="st-icon">${s.name.charAt(0)}</div>
+                        <span class="st-name">${s.name}</span>
+                    </div>
+                    <div class="st-perf ${isPos ? 'green' : 'red'}">
+                        ${s.return.toFixed(2)}%
+                    </div>
+                    <div class="st-chart-mini">
+                        <!-- Tiny visual bar representation -->
+                        <div class="bar" style="width: ${Math.abs(s.return) * 5}%; background: ${isPos ? 'var(--accent-green)' : 'var(--accent-red)'}"></div>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        function renderInsights(trades) {
+            const container = document.getElementById('insights-feed');
+            container.innerHTML = trades.slice().reverse().slice(0, 5).map(t => `
+                <div class="insight-row">
+                    <div class="insight-icon ${t.action === 'BUY' ? 'buy' : 'sell'}">
+                        ${t.action === 'BUY' ? '🚀' : '📉'}
+                    </div>
+                    <div class="insight-content">
+                        <strong>${t.strategy}</strong>
+                        <p>${t.action === 'BUY' ? 'دخول قوي' : 'جني أرباح'} على ${t.symbol} بسعر ${t.price}</p>
+                    </div>
+                    <span class="time">الآن</span>
+                </div>
+            `).join('');
+        }
+
+        // --- Chat ---
+        function openChat() { document.getElementById('chat-modal').classList.remove('hidden'); }
+        function closeChat() { document.getElementById('chat-modal').classList.add('hidden'); }
+
+        async function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const txt = input.value;
+            if (!txt) return;
+
+            const area = document.getElementById('chat-history');
+            area.innerHTML += `<div class="msg user">${txt}</div>`;
+            input.value = '';
+            area.scrollTop = area.scrollHeight;
+
+            // Fake Request for UI speed
+            area.innerHTML += `<div class="msg bot typing">جاري التحليل...</div>`;
+
+            try {
+                const res = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: txt, persona: 'المستشار' })
+                });
+                const data = await res.json();
+
+                document.querySelector('.typing').remove();
+                area.innerHTML += `<div class="msg bot">${data.response}</div>`;
+                area.scrollTop = area.scrollHeight;
+
+            } catch (e) { console.log(e); }
+        }
+
+    </script>
+</body>
+
+</html>

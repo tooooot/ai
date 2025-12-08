@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>لوحة القيادة - الأسهم السعودية AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align:center; padding:20px;">لوحة تحكم الاستراتيجيات</h1>
+    <div style="text-align:center;">
+        <a href="/live" style="color:var(--accent-gold); font-size:1.2rem;">🔴 الذهاب للبث المباشر</a>
+    </div>
+    <div class="dashboard-grid" id="grid">
+        <!-- populated by JS -->
+    </div>
+
+    <script>
+        // Fetch and display simplified cards for all portfolios
+        async function loadDashboard() {
+            const res = await fetch('/api/live_data');
+            const data = await res.json();
+            const grid = document.getElementById('grid');
+
+            grid.innerHTML = data.leaderboard.map(p => `
+                <div class="trade-card">
+                    <div>
+                        <h3>${p.name}</h3>
+                        <div class="mono" style="font-size:1.5rem; color:${p.return >= 0 ? 'var(--accent-green)' : 'var(--accent-red)'}">
+                            ${p.return.toFixed(2)}%
+                        </div>
+                    </div>
+                    <div>
+                        <div style="font-size:0.8rem; color:#888;">القيمة الحالية</div>
+                        <div class="mono">${p.value.toFixed(0)}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        loadDashboard();
+    </script>
+</body>
+
+</html>
