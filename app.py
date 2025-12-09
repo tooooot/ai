@@ -108,6 +108,8 @@ def live_broadcast():
     return render_template('live.html')
 
 @app.route('/app', strict_slashes=False)
+@app.route('/mobile', strict_slashes=False)
+@app.route('/start', strict_slashes=False)
 def mobile_app_view():
     return render_template('mobile_app.html')
 
