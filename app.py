@@ -106,7 +106,8 @@ sim_thread.start()
 
 @app.route('/')
 def landing():
-    return render_template('landing.html')
+    # TEMPORARY DEBUG: Return simple string
+    return "HELLO WORLD - V-DEBUG-3 - APP IS ALIVE"
 
 @app.route('/health')
 def health_check():
