@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AI Private Wealth</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}?v={{ range(1, 10000) | random }}">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap"
         rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -295,7 +295,7 @@
         </div>
 
         <!-- ================== MODAL: BROKER SELECTION ================== -->
-        <div id="broker-modal" class="view-section" style="background:rgba(0,0,0,0.95); z-index:9999;">
+        <div id="view-broker-modal" class="view-section" style="background:rgba(0,0,0,0.95); z-index:9999;">
             <header class="app-header">
                 <button class="icon-btn" onclick="closeBrokerModal()">✖️ إلغاء</button>
                 <h3 style="margin:0;">ربط المحفظة</h3>
@@ -402,6 +402,11 @@
     </div>
 
     <script>
+        // Global Error Handler for Mobile Debugging
+        window.onerror = function (msg, url, line) {
+            alert("Error: " + msg + "\nLine: " + line);
+        };
+
         lucide.createIcons();
         let currentBot = null;
         let explainMode = false;
@@ -436,17 +441,27 @@
             }
         };
 
-        // View Switching
+        // View Switching (Simplified to prevent blank screen)
         function switchView(viewName) {
+            // Hide all first
             document.querySelectorAll('.view-section').forEach(el => {
                 el.classList.remove('active');
-                setTimeout(() => {
-                    if (!el.classList.contains('active')) el.style.display = 'none';
-                }, 500);
+                el.style.display = 'none'; // Immediate hide
             });
+
+            // Show target
             const target = document.getElementById('view-' + viewName);
-            target.style.display = 'block';
-            setTimeout(() => target.classList.add('active'), 50);
+            if (target) {
+                target.style.display = 'block';
+                // Force reflow to ensure display:block is applied before transition
+                void target.offsetWidth;
+                target.classList.add('active');
+            } else {
+                console.error("View not found: " + viewName);
+            }
+
+            // Scroll to top
+            window.scrollTo(0, 0);
         }
 
         // --- NEW: Bot Details Logic ---
@@ -591,14 +606,26 @@
         }
 
         function subscribe(botName) {
-            alert(`تم ربط المحفظة بنجاح مع ${botName}! 🚀`);
+            // Safety Check
+            if (!botName) botName = "المساعد الذكي";
             currentBot = botName;
 
-            document.getElementById('dash-avatar').innerText = botName[0];
-            document.getElementById('dash-status').innerText = `متصل بـ ${botName}`;
-            document.querySelector('.fab-chat span').innerText = `اسأل ${botName}`;
+            // Update Dashboard UI (Safety checks for elements)
+            const avatar = document.getElementById('dash-avatar');
+            if (avatar) avatar.innerText = botName[0];
 
+            const status = document.getElementById('dash-status');
+            if (status) status.innerText = `متصل بـ ${botName}`;
+
+            const chatBtn = document.querySelector('.fab-chat span');
+            if (chatBtn) chatBtn.innerText = `اسأل ${botName}`;
+
+            // Switch first, then load data
             switchView('dashboard');
+
+            // Show toast instead of alert for smoother flow
+            showInsight(`تم ربط المحفظة بنجاح مع ${botName}! 🚀`);
+
             loadStrategy(botName);
 
             toggleExplain();
@@ -610,17 +637,20 @@
         function toggleExplain() {
             explainMode = !explainMode;
             const btn = document.getElementById('explain-toggle');
-            if (explainMode) {
-                btn.style.color = 'var(--accent-gold)';
-                // alert("تم تفعيل الشرح");
-                startSimulation();
-            } else {
-                btn.style.color = 'var(--text-muted)';
+            if (btn) {
+                if (explainMode) {
+                    btn.style.color = 'var(--accent-gold)';
+                    startSimulation();
+                } else {
+                    btn.style.color = 'var(--text-muted)';
+                }
             }
         }
 
         function showInsight(text) {
             const container = document.getElementById('insight-container');
+            if (!container) return;
+
             const bubble = document.createElement('div');
             bubble.className = 'insight-bubble';
             bubble.innerHTML = `
@@ -628,7 +658,7 @@
                 <div style="font-size:0.85rem; color:white; line-height:1.4;">${text}</div>
             `;
             container.appendChild(bubble);
-            lucide.createIcons();
+            if (window.lucide) lucide.createIcons();
 
             setTimeout(() => {
                 bubble.style.opacity = '0';
@@ -647,11 +677,16 @@
 
         async function loadStrategy(name) {
             const container = document.getElementById('content-area');
+            if (!container) return;
+
             container.innerHTML = '<div style="text-align:center; padding:20px; color:#aaa;"> جارِ جلب البيانات...</div>';
             try {
                 const res = await fetch(`/api/portfolio/${encodeURIComponent(name)}`);
+                if (!res.ok) throw new Error("API Error");
+
                 const data = await res.json();
-                document.getElementById('cash-display').innerText = data.cash.toFixed(2) + " SAR";
+                const cashDisplay = document.getElementById('cash-display');
+                if (cashDisplay && data.cash) cashDisplay.innerText = data.cash.toFixed(2) + " SAR";
 
                 if (data.history && data.history.length > 0) {
                     container.innerHTML = data.history.slice().reverse().map(t => {
@@ -670,14 +705,21 @@
                         </div>
                         `;
                     }).join('');
-                    lucide.createIcons();
+                    if (window.lucide) lucide.createIcons();
                 } else {
                     container.innerHTML = '<div style="text-align:center; padding:20px; color:#666;">لا توجد صفقات حالياً.</div>';
                 }
-            } catch (e) { console.error(e); }
+            } catch (e) {
+                console.error(e);
+                container.innerHTML = '<div style="text-align:center; color:red;">خطأ في الاتصال بالسيرفر</div>';
+            }
         }
 
-        function openChat() { document.getElementById('chat-modal').style.display = 'flex'; }
+        function openChat() {
+            const modal = document.getElementById('chat-modal');
+            if (modal) modal.style.display = 'flex';
+        }
+
         async function sendMessage() {
             const inp = document.getElementById('chat-input');
             const txt = inp.value;
