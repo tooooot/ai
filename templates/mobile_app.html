@@ -421,6 +421,26 @@
             </button>
         </div>
 
+        <!-- Bottom Navigation (Native Feel) -->
+        <nav class="bottom-nav">
+            <button class="nav-item active" onclick="switchView('onboarding')">
+                <i data-lucide="home"></i>
+                <span>الرئيسية</span>
+            </button>
+            <button class="nav-item" onclick="switchView('marketplace')">
+                <i data-lucide="grid"></i>
+                <span>السوق</span>
+            </button>
+            <button class="nav-item" onclick="switchView('dashboard')">
+                <i data-lucide="pie-chart"></i>
+                <span>محفظتي</span>
+            </button>
+            <button class="nav-item" onclick="window.location.href='/live'">
+                <i data-lucide="tv"></i>
+                <span>مباشر</span>
+            </button>
+        </nav>
+
     </div>
 
     <!-- Chat Overlay -->
@@ -624,6 +644,11 @@
             grid.style.pointerEvents = 'none';
             statusDiv.style.display = 'block';
 
+            // Persistence: Save to LocalStorage
+            localStorage.setItem('user_broker', brokerName);
+            localStorage.setItem('user_bot', selectedBotForDetail);
+            localStorage.setItem('user_color', color);
+
             // Simulation Sequence
             setTimeout(() => { statusText.innerText = "جاري المصادقة مع النفاذ الوطني..."; }, 1500);
             setTimeout(() => { statusText.innerText = `جاري جلب المحفظة من ${brokerName}...`; }, 3500);
@@ -643,6 +668,24 @@
             }, 6500);
         }
 
+        // Check Persistence on Load
+        window.onload = function () {
+            lucide.createIcons();
+            const savedBot = localStorage.getItem('user_bot');
+            const savedBroker = localStorage.getItem('user_broker');
+
+            if (savedBot && savedBroker) {
+                // Auto-login logic
+                console.log("Restoring session for: " + savedBot);
+                // We don't auto-switch to dashboard to allow them to see the landing, 
+                // but we update the state so when they click "My Portfolio" it works.
+                currentBot = savedBot;
+                updateDashboardUI(savedBot);
+                // Create a small "Welcome Back" toast?
+                setTimeout(() => showInsight(`أهلاً بك مجدداً! محفظتك متصلة بـ ${savedBot}`), 2000);
+            }
+        };
+
         function confirmSubscribe() {
             // Deprecated, redirected to openBrokerModal
             openBrokerModal();
@@ -653,15 +696,7 @@
             if (!botName) botName = "المساعد الذكي";
             currentBot = botName;
 
-            // Update Dashboard UI (Safety checks for elements)
-            const avatar = document.getElementById('dash-avatar');
-            if (avatar) avatar.innerText = botName[0];
-
-            const status = document.getElementById('dash-status');
-            if (status) status.innerText = `متصل بـ ${botName}`;
-
-            const chatBtn = document.querySelector('.fab-chat span');
-            if (chatBtn) chatBtn.innerText = `اسأل ${botName}`;
+            updateDashboardUI(botName);
 
             // Switch first, then load data
             switchView('dashboard');
@@ -675,6 +710,18 @@
             setTimeout(() => {
                 showInsight("جاري تحليل السيولة الداخلة الآن...");
             }, 1000);
+        }
+
+        function updateDashboardUI(botName) {
+            // Update Dashboard UI (Safety checks for elements)
+            const avatar = document.getElementById('dash-avatar');
+            if (avatar) avatar.innerText = botName[0];
+
+            const status = document.getElementById('dash-status');
+            if (status) status.innerText = `متصل بـ ${botName}`;
+
+            const chatBtn = document.querySelector('.fab-chat span');
+            if (chatBtn) chatBtn.innerText = `اسأل ${botName}`;
         }
 
         function toggleExplain() {
