@@ -101,733 +101,533 @@
         color: var(--accent-gold);
     }
 
-    .nav-item i {
-        width: 20px;
-        height: 20px;
+    /* --- Visual Excellence: Animations --- */
+
+    /* 1. Page Transitions */
+    .view-section {
+        animation: fadeIn 0.3s ease-in-out;
     }
-</style>
 
-<body class="bank-theme app-mode">
-
-    <!-- App Container -->
-    <div class="app-container">
-
-        <!-- ================== VIEW 1: ONBOARDING ================== -->
-        <div id="view-onboarding" class="view-section active">
-            <div class="onboarding-slide">
-                <div class="slide-icon">🧠 🆚 🤖</div>
-                <h1 class="main-title">لماذا تخسر في السوق؟</h1>
-                <p style="color:var(--text-secondary); line-height:1.6;">
-                    الإنسان يتردد، يخاف، ويتعب.<br>
-                    الأسواق لا ترحم العواطف.
-                </p>
-
-                <div class="contrast-box">
-                    <div class="vs-item vs-brain">
-                        <i data-lucide="frown" style="margin-bottom:5px;"></i><br>
-                        قرارات عاطفية
-                    </div>
-                    <div style="font-weight:bold; color:#555;">VS</div>
-                    <div class="vs-item vs-bot">
-                        <i data-lucide="cpu" style="margin-bottom:5px;"></i><br>
-                        بيانات صافية
-                    </div>
-                </div>
-
-                <div class="contrast-box">
-                    <div class="vs-item vs-brain">
-                        <i data-lucide="clock" style="margin-bottom:5px;"></i><br>
-                        نوم وراحة
-                    </div>
-                    <div style="font-weight:bold; color:#555;">VS</div>
-                    <div class="vs-item vs-bot">
-                        <i data-lucide="zap" style="margin-bottom:5px;"></i><br>
-                        24/7 اقتناص
-                    </div>
-                </div>
-
-                <button class="bank-btn" onclick="switchView('marketplace')" style="width:100%; margin-top:20px;">
-                    اكتشف الروبوتات 🚀
-                </button>
-            </div>
-        </div>
-
-        <!-- ================== VIEW 2: MARKETPLACE ================== -->
-        <div id="view-marketplace" class="view-section">
-            <header class="app-header" style="background:transparent;">
-                <h2 style="color:white; margin:0;">اختر عقلك الذكي</h2>
-                <button class="icon-btn" onclick="switchView('onboarding')">↩️</button>
-            </header>
-
-            <div class="market-grid">
-                <!-- Bot 1: Sayyad -->
-                <div class="bot-card-pro featured">
-                    <div class="bot-card-header">
-                        <div style="display:flex; align-items:center; gap:10px;">
-                            <div class="avatar" style="background:var(--accent-gold); color:black;">ص</div>
-                            <div>
-                                <div style="font-weight:bold; color:white;">ريبوت صياد</div>
-                                <div style="font-size:0.7rem; color:var(--accent-gold);">الأكثر شعبية</div>
-                            </div>
-                        </div>
-                        <div style="text-align:center;">
-                            <div style="font-weight:900; color:var(--accent-green); font-size:1.2rem;">+13%</div>
-                            <div style="font-size:0.6rem; color:#888;">عائد شهري</div>
-                        </div>
-                    </div>
-                    <p style="font-size:0.8rem; color:#ccc; margin-bottom:15px;">
-                        متخصص في اقتناص الفرص السريعة في السوق السعودي. يعتمد على التحليل الفني اللحظي.
-                    </p>
-                    <button class="subscribe-btn" onclick="showBotDetails('صياد', 13)">تحليل الأداء (للمقتنعين فقط)
-                        📊</button>
-                </div>
-
-                <!-- Bot 2: Razin -->
-                <div class="bot-card-pro">
-                    <div class="bot-card-header">
-                        <div style="display:flex; align-items:center; gap:10px;">
-                            <div class="avatar" style="background:#3b82f6; color:white;">ر</div>
-                            <div>
-                                <div style="font-weight:bold; color:white;">ريبوت رزين</div>
-                                <div style="font-size:0.7rem; color:#3b82f6;">مخاطرة منخفضة</div>
-                            </div>
-                        </div>
-                        <div style="text-align:center;">
-                            <div style="font-weight:900; color:var(--accent-green); font-size:1.2rem;">+5%</div>
-                            <div style="font-size:0.6rem; color:#888;">عائد شهري</div>
-                        </div>
-                    </div>
-                    <p style="font-size:0.8rem; color:#ccc; margin-bottom:15px;">
-                        يستهدف الأسهم القيادية ذات العوائد المستقرة. مناسب للاستثمار طويل الأجل.
-                    </p>
-                    <button class="subscribe-btn" style="background:#334155; color:white;"
-                        onclick="showBotDetails('رزين', 5)">تحليل الأداء 📊</button>
-                </div>
-
-                <!-- Bot 3: Meqdam -->
-                <div class="bot-card-pro">
-                    <div class="bot-card-header">
-                        <div style="display:flex; align-items:center; gap:10px;">
-                            <div class="avatar" style="background:#ef4444; color:white;">م</div>
-                            <div>
-                                <div style="font-weight:bold; color:white;">ريبوت مقدام</div>
-                                <div style="font-size:0.7rem; color:#ef4444;">عالي المخاطر</div>
-                            </div>
-                        </div>
-                        <div style="text-align:center;">
-                            <div style="font-weight:900; color:var(--accent-green); font-size:1.2rem;">+22%</div>
-                            <div style="font-size:0.6rem; color:#888;">عائد شهري</div>
-                        </div>
-                    </div>
-                    <p style="font-size:0.8rem; color:#ccc; margin-bottom:15px;">
-                        جسور، لا يخشى التقلبات. يدخل في صفقات ذات عوائد عالية ومخاطرة مدروسة.
-                    </p>
-                    <button class="subscribe-btn" style="background:#334155; color:white;"
-                        onclick="showBotDetails('مقدام', 22)">تحليل الأداء 📊</button>
-                </div>
-
-                <!-- Bot 4: Qanas (Sniper) -->
-                <div class="bot-card-pro">
-                    <div class="bot-card-header">
-                        <div style="display:flex; align-items:center; gap:10px;">
-                            <div class="avatar" style="background:#a855f7; color:white;">ق</div>
-                            <div>
-                                <div style="font-weight:bold; color:white;">ريبوت قناص</div>
-                                <div style="font-size:0.7rem; color:#a855f7;">دقة عالية</div>
-                            </div>
-                        </div>
-                        <div style="text-align:center;">
-                            <div style="font-weight:900; color:var(--accent-green); font-size:1.2rem;">+18%</div>
-                            <div style="font-size:0.6rem; color:#888;">عائد شهري</div>
-                        </div>
-                    </div>
-                    <p style="font-size:0.8rem; color:#ccc; margin-bottom:15px;">
-                        ينتظر الفرصة المثالية بصبر طويل. معدل صفقات قليل ولكن هامش ربح مرتفع.
-                    </p>
-                    <button class="subscribe-btn" style="background:#334155; color:white;"
-                        onclick="showBotDetails('قناص', 18)">تحليل الأداء 📊</button>
-                </div>
-
-                <!-- Bot 5: Awatif (AI Assistant) -->
-                <div class="bot-card-pro">
-                    <div class="bot-card-header">
-                        <div style="display:flex; align-items:center; gap:10px;">
-                            <div class="avatar" style="background:#ec4899; color:white;">ع</div>
-                            <div>
-                                <div style="font-weight:bold; color:white;">مساعد عواطف</div>
-                                <div style="font-size:0.7rem; color:#ec4899;">مساعد شخصي</div>
-                            </div>
-                        </div>
-                        <div style="text-align:center;">
-                            <div style="font-weight:900; color:var(--accent-green); font-size:1.2rem;">--</div>
-                        </div>
-                    </div>
-                    <p style="font-size:0.8rem; color:#ccc; margin-bottom:15px;">
-                        مساعدك الشخصي لإدارة المحفظة والإجابة عن استفساراتك حول السوق.
-                    </p>
-                    <button class="subscribe-btn" style="background:#334155; color:white;"
-                        onclick="showBotDetails('عواطف', 0)">تحدث الآن 💬</button>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- ================== VIEW 2.5: BOT DETAILS (CONVICTION) ================== -->
-        <div id="view-bot-detail" class="view-section" style="padding-bottom:100px;">
-            <header class="app-header">
-                <button class="icon-btn" onclick="switchView('marketplace')">↩️ عودة</button>
-                <h3 style="margin:0; font-size:1rem;">تحليل الأداء</h3>
-                <div style="width:30px;"></div>
-            </header>
-
-            <div class="detail-header">
-                <div class="avatar" id="detail-avatar"
-                    style="width:60px; height:60px; font-size:1.5rem; margin:0 auto;"></div>
-                <h2 id="detail-name" style="margin:10px 0 5px;">--</h2>
-                <div class="detail-stat-big" id="detail-return">--%</div>
-                <p style="color:#888; font-size:0.8rem;">العائد التراكمي منذ بداية العام</p>
-            </div>
-
-            <div class="section-header">
-                <h3>📈 الأداء الأسبوعي (مقارنة بالسوق)</h3>
-            </div>
-            <div class="chart-container">
-                <!-- Mock Bars -->
-                <div class="chart-bar-group">
-                    <div class="chart-bar win" style="height:40%;"></div><span class="chart-label">أسبوع 1</span>
-                </div>
-                <div class="chart-bar-group">
-                    <div class="chart-bar win" style="height:60%;"></div><span class="chart-label">أسبوع 2</span>
-                </div>
-                <div class="chart-bar-group">
-                    <div class="chart-bar loss" style="height:20%;"></div><span class="chart-label">أسبوع 3</span>
-                </div>
-                <div class="chart-bar-group">
-                    <div class="chart-bar win" style="height:80%;"></div><span class="chart-label">أسبوع 4</span>
-                </div>
-                <div class="chart-bar-group">
-                    <div class="chart-bar win" style="height:90%;"></div><span class="chart-label">الحالي</span>
-                </div>
-            </div>
-
-            <div class="section-header">
-                <h3>🧠 كيف أفكر؟ (المصادر)</h3>
-            </div>
-            <div class="source-grid">
-                <div class="source-item"><i data-lucide="newspaper"></i><br>أخبار السوق</div>
-                <div class="source-item"><i data-lucide="bar-chart-2"></i><br>التحليل الفني</div>
-                <div class="source-item"><i data-lucide="globe"></i><br>الأسواق العالمية</div>
-                <div class="source-item"><i data-lucide="users"></i><br>حركة الملاك</div>
-                <div class="source-item"><i data-lucide="zap"></i><br>السيولة اللحظية</div>
-                <div class="source-item"><i data-lucide="shield"></i><br>إدارة المخاطر</div>
-            </div>
-
-            <div class="section-header">
-                <h3>📜 سجل قرارات الأسبوع الماضي</h3>
-            </div>
-            <div class="proof-section" id="proof-list">
-                <!-- Injected via JS -->
-            </div>
-
-            <div class="sticky-action">
-                <button class="bank-btn" style="width:100%; box-shadow:0 0 20px rgba(251, 191, 36, 0.4);"
-                    onclick="openBrokerModal()">
-                    اقتنعت ✅ (اربط المحفظة)
-                </button>
-            </div>
-        </div>
-
-        <!-- ================== MODAL: BROKER SELECTION ================== -->
-        <div id="view-broker-modal" class="view-section" style="background:rgba(0,0,0,0.95); z-index:9999;">
-            <header class="app-header">
-                <button class="icon-btn" onclick="closeBrokerModal()">✖️ إلغاء</button>
-                <h3 style="margin:0;">ربط المحفظة</h3>
-                <div style="width:30px;"></div>
-            </header>
-
-            <div style="padding:20px; text-align:center;">
-                <p style="color:#ccc; margin-bottom:30px;">اختر وسيطك المالي لمنح تصريح التداول</p>
-
-                <div class="broker-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
-                    <button class="broker-card" onclick="connectBroker('الراجحي المالية', '#2563eb')">
-                        <div class="broker-logo" style="background:#2563eb;">AR</div>
-                        <span>الراجحي المالية</span>
-                    </button>
-                    <button class="broker-card" onclick="connectBroker('الأهلي كابيتال', '#16a34a')">
-                        <div class="broker-logo" style="background:#16a34a;">SNB</div>
-                        <span>الأهلي كابيتال</span>
-                    </button>
-                    <button class="broker-card" onclick="connectBroker('دراية المالية', '#a855f7')">
-                        <div class="broker-logo" style="background:#a855f7;">DY</div>
-                        <span>دراية المالية</span>
-                    </button>
-                    <button class="broker-card" onclick="connectBroker('الرياض المالية', '#ca8a04')">
-                        <div class="broker-logo" style="background:#ca8a04;">RI</div>
-                        <span>الرياض المالية</span>
-                    </button>
-                </div>
-
-                <div id="connection-status" style="margin-top:40px; display:none;">
-                    <div class="loader-spinner"></div>
-                    <p id="status-text" style="margin-top:20px; color:var(--accent-gold);">جاري الاتصال...</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================== VIEW 3: DASHBOARD ================== -->
-        <div id="view-dashboard" class="view-section">
-
-            <div id="insight-container"></div>
-
-            <header class="app-header">
-                <div class="user-info">
-                    <div class="avatar" id="dash-avatar">AI</div>
-                    <div>
-                        <span class="greeting">محفظة نشطة</span>
-                        <span class="status" id="dash-status">متصل بـ --</span>
-                    </div>
-                </div>
-                <div style="display:flex; gap:10px;">
-                    <button class="icon-btn" id="explain-toggle" onclick="toggleExplain()"
-                        style="color:var(--text-muted);">
-                        <i data-lucide="lightbulb"></i>
-                    </button>
-                    <button class="icon-btn" onclick="window.location.href='/verify'">🛡️</button>
-                </div>
-            </header>
-
-            <div class="balance-card">
-                <div class="label">صافي قيمة الأصول</div>
-                <div class="amount" id="cash-display">10,000 SAR</div>
-                <div class="change positive">
-                    <i data-lucide="activity"></i>
-                    <span>يعمل الآن في السوق...</span>
-                </div>
-            </div>
-
-            <div class="section-header">
-                <h3>📜 القرارات الحية</h3>
-                <span class="status" style="font-size:0.7rem;">تحديث لحظي</span>
-            </div>
-
-            <div class="feed-wrapper" style="margin: 0 20px 80px; height:auto; min-height:400px; padding-bottom:100px;">
-                <div class="transactions-list" id="content-area">
-                </div>
-            </div>
-
-            <button class="fab-chat" onclick="openChat()">
-                <i data-lucide="mic"></i>
-                <span>اسأل الروبوت</span>
-            </button>
-        </div>
-
-        <!-- Bottom Navigation (Native Feel) -->
-        <nav class="bottom-nav">
-            <button class="nav-item active" onclick="switchView('onboarding')">
-                <i data-lucide="home"></i>
-                <span>الرئيسية</span>
-            </button>
-            <button class="nav-item" onclick="switchView('marketplace')">
-                <i data-lucide="grid"></i>
-                <span>السوق</span>
-            </button>
-            <button class="nav-item" onclick="switchView('dashboard')">
-                <i data-lucide="pie-chart"></i>
-                <span>محفظتي</span>
-            </button>
-            <button class="nav-item" onclick="window.location.href='/live'">
-                <i data-lucide="tv"></i>
-                <span>مباشر</span>
-            </button>
-        </nav>
-
-    </div>
-
-    <!-- Chat Overlay -->
-    <div id="chat-modal"
-        style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; flex-direction:column; justify-content:flex-end;">
-        <div
-            style="background:var(--bg-card); height:85%; width:100%; border-radius:20px 20px 0 0; display:flex; flex-direction:column; max-width:480px; margin:0 auto;">
-            <div
-                style="padding:20px; border-bottom:1px solid #333; display:flex; justify-content:space-between; align-items:center;">
-                <h3 style="margin:0; color:white;">المساعد الذكي</h3>
-                <button onclick="document.getElementById('chat-modal').style.display='none'"
-                    style="background:none; border:none; color:white; font-size:1.5rem;">&times;</button>
-            </div>
-            <div id="chat-history" style="flex:1; overflow-y:auto; padding:20px;"></div>
-            <div style="padding:20px; border-top:1px solid #333; display:flex; gap:10px;">
-                <input type="text" id="chat-input" placeholder="اكتب رسالتك..."
-                    style="flex:1; padding:12px; border-radius:10px; border:none; background:#0f172a; color:white;">
-                <button onclick="sendMessage()"
-                    style="background:var(--accent-green); color:black; border:none; padding:0 20px; border-radius:10px; font-weight:bold;">إرسال</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Global Error Handler for Mobile Debugging
-        window.onerror = function (msg, url, line) {
-            alert("Error: " + msg + "\nLine: " + line);
-        };
-
-        lucide.createIcons();
-        let currentBot = null;
-        let explainMode = false;
-        let selectedBotForDetail = null;
-
-        // Bot Data Database
-        const botData = {
-            'صياد': {
-                slogan: "سهمك في المرمى 🏹",
-                strategyTitle: "Momentum Breakout (اختراق الزخم)",
-                scientificDesc: "يعتمد على خوارزميات 'Relative Strength Index' مع دمج أحجام التداول (Volume Weighted Analysis) لاكتشاف الأسهم التي بدأت في الانطلاق قبل دخول الجمهور."
-            },
-            'رزين': {
-                slogan: "العقل قبل العاطفة ⚖️",
-                strategyTitle: "Value & Growth (القيمة والنمو)",
-                scientificDesc: "يستخدم تحليل القوائم المالية (P/E Ratio, EPS Growth) لتقييم السعر العادل للسهم، ويشتري فقط عندما يكون السعر السوقي أقل من القيمة الجوهرية (Intrinsic Value)."
-            },
-            'مقدام': {
-                slogan: "قلب الأسد 🦁",
-                strategyTitle: "Volatility Scalping (اقتناص التذبذب)",
-                scientificDesc: "يعمل في الأسواق المتطرفة. يستخدم 'Bollinger Bands' و 'ATR' لتحديد نقاط الانعكاس السريعة في الأسهم الأكثر تذبذباً خلال الجلسة."
-            },
-            'قناص': {
-                slogan: "طلقة واحدة تكفي 🎯",
-                strategyTitle: "Supply & Demand Zones (العرض والطلب)",
-                scientificDesc: "يراقب مناطق السيولة المؤسساتية (Smart Money Concepts). لا يتداول عشوائياً، بل يضع أوامر معلقة في مناطق 'Order Blocks' وينتظر السعر."
-            },
-            'عواطف': {
-                slogan: "مساعدك الشخصي 🤖",
-                strategyTitle: "Natural Language Processing",
-                scientificDesc: "ذكاء اصطناعي توليدي مخصص للأسواق المالية، يحلل الأخبار والبيانات للإجابة على استفساراتك بشكل فوري."
-            }
-        };
-
-        // View Switching (Simplified to prevent blank screen)
-        function switchView(viewName) {
-            // Hide all first
-            document.querySelectorAll('.view-section').forEach(el => {
-                el.classList.remove('active');
-                el.style.display = 'none'; // Immediate hide
-            });
-
-            // Show target
-            const target = document.getElementById('view-' + viewName);
-            if (target) {
-                target.style.display = 'block';
-                // Force reflow to ensure display:block is applied before transition
-                void target.offsetWidth;
-                target.classList.add('active');
-            } else {
-                console.error("View not found: " + viewName);
-            }
-
-            // Scroll to top
-            window.scrollTo(0, 0);
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
         }
 
-        // --- NEW: Bot Details Logic ---
-        function showBotDetails(botName, returnVal) {
-            selectedBotForDetail = botName;
-            const data = botData[botName] || { slogan: '', strategyTitle: 'General Strategy', scientificDesc: '...' };
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
 
-            // Populate Detials
-            document.getElementById('detail-name').innerText = `ريبوت ${botName}`;
-            document.getElementById('detail-avatar').innerText = botName[0];
+    /* 2. Skeleton Loader (Shimmer) */
+    .skeleton {
+        background: #1e293b;
+        background: linear-gradient(110deg, #1e293b 8%, #334155 18%, #1e293b 33%);
+        border-radius: 5px;
+        background-size: 200% 100%;
+        animation: shimmer 1.5s linear infinite;
+    }
 
-            // Handle return val display
-            if (returnVal > 0) {
-                document.getElementById('detail-return').innerText = `+${returnVal}%`;
-                document.getElementById('detail-return').style.color = 'var(--accent-green)';
-            } else {
-                document.getElementById('detail-return').innerText = `--`;
-                document.getElementById('detail-return').style.color = 'var(--text-muted)';
+    .skeleton-text {
+        height: 12px;
+        margin-bottom: 8px;
+        border-radius: 4px;
+    }
+
+    .skeleton-box {
+        height: 60px;
+        border-radius: 12px;
+    }
+
+    @keyframes shimmer {
+        to {
+            background-position-x: -200%;
+        }
+    }
+
+    /* 3. Touch Feedback (Active Scale) */
+    .bank-btn:active,
+    .subscribe-btn:active,
+    .icon-btn:active,
+    .nav-item:active {
+        transform: scale(0.95);
+        opacity: 0.8;
+    }
+
+    .nav-item {
+        transition: transform 0.1s;
+    }
+
+    /* 4. Enhanced Gradients */
+    .bot-card-pro.featured {
+        background: linear-gradient(135deg, rgba(234, 179, 8, 0.15) 0%, rgba(0, 0, 0, 0) 100%);
+        border: 1px solid rgba(234, 179, 8, 0.3);
+    }
+
+
+    <body class="bank-theme app-mode">< !-- App Container --><div class="app-container">< !--==================VIEW 1: ONBOARDING==================--><div id="view-onboarding" class="view-section active"><div class="onboarding-slide"><div class="slide-icon">🧠 🆚 🤖</div><h1 class="main-title">لماذا تخسر في السوق؟</h1><p style="color:var(--text-secondary); line-height:1.6;">الإنسان يتردد، يخاف، ويتعب.<br>الأسواق لا ترحم العواطف. </p><div class="contrast-box"><div class="vs-item vs-brain"><i data-lucide="frown" style="margin-bottom:5px;"></i><br>قرارات عاطفية </div><div style="font-weight:bold; color:#555;">VS</div><div class="vs-item vs-bot"><i data-lucide="cpu" style="margin-bottom:5px;"></i><br>بيانات صافية </div></div><div class="contrast-box"><div class="vs-item vs-brain"><i data-lucide="clock" style="margin-bottom:5px;"></i><br>نوم وراحة </div><div style="font-weight:bold; color:#555;">VS</div><div class="vs-item vs-bot"><i data-lucide="zap" style="margin-bottom:5px;"></i><br>24/7 اقتناص </div></div><button class="bank-btn" onclick="switchView('marketplace')" style="width:100%; margin-top:20px;">اكتشف الروبوتات 🚀 </button></div></div>< !--==================VIEW 2: MARKETPLACE==================--><div id="view-marketplace" class="view-section"><header class="app-header" style="background:transparent;"><h2 style="color:white; margin:0;">اختر عقلك الذكي</h2><button class="icon-btn" onclick="switchView('onboarding')">↩️</button></header><div class="market-grid">< !-- Bot 1: Sayyad --><div class="bot-card-pro featured"><div class="bot-card-header"><div style="display:flex; align-items:center; gap:10px;"><div class="avatar" style="background:var(--accent-gold); color:black;">ص</div><div><div style="font-weight:bold; color:white;">ريبوت صياد</div><div style="font-size:0.7rem; color:var(--accent-gold);">الأكثر شعبية</div></div></div><div style="text-align:center;"><div style="font-weight:900; color:var(--accent-green); font-size:1.2rem;">+13%</div><div style="font-size:0.6rem; color:#888;">عائد شهري</div></div></div><p style="font-size:0.8rem; color:#ccc; margin-bottom:15px;">متخصص في اقتناص الفرص السريعة في السوق السعودي. يعتمد على التحليل الفني اللحظي. </p><button class="subscribe-btn" onclick="showBotDetails('صياد', 13)">تحليل الأداء (للمقتنعين فقط) 📊</button></div>< !-- Bot 2: Razin --><div class="bot-card-pro"><div class="bot-card-header"><div style="display:flex; align-items:center; gap:10px;"><div class="avatar" style="background:#3b82f6; color:white;">ر</div><div><div style="font-weight:bold; color:white;">ريبوت رزين</div><div style="font-size:0.7rem; color:#3b82f6;">مخاطرة منخفضة</div></div></div><div style="text-align:center;"><div style="font-weight:900; color:var(--accent-green); font-size:1.2rem;">+5%</div><div style="font-size:0.6rem; color:#888;">عائد شهري</div></div></div><p style="font-size:0.8rem; color:#ccc; margin-bottom:15px;">يستهدف الأسهم القيادية ذات العوائد المستقرة. مناسب للاستثمار طويل الأجل. </p><button class="subscribe-btn" style="background:#334155; color:white;"
+    onclick="showBotDetails('رزين', 5)">تحليل الأداء 📊</button></div>< !-- Bot 3: Meqdam --><div class="bot-card-pro"><div class="bot-card-header"><div style="display:flex; align-items:center; gap:10px;"><div class="avatar" style="background:#ef4444; color:white;">م</div><div><div style="font-weight:bold; color:white;">ريبوت مقدام</div><div style="font-size:0.7rem; color:#ef4444;">عالي المخاطر</div></div></div><div style="text-align:center;"><div style="font-weight:900; color:var(--accent-green); font-size:1.2rem;">+22%</div><div style="font-size:0.6rem; color:#888;">عائد شهري</div></div></div><p style="font-size:0.8rem; color:#ccc; margin-bottom:15px;">جسور، لا يخشى التقلبات. يدخل في صفقات ذات عوائد عالية ومخاطرة مدروسة. </p><button class="subscribe-btn" style="background:#334155; color:white;"
+    onclick="showBotDetails('مقدام', 22)">تحليل الأداء 📊</button></div>< !-- Bot 4: Qanas (Sniper) --><div class="bot-card-pro"><div class="bot-card-header"><div style="display:flex; align-items:center; gap:10px;"><div class="avatar" style="background:#a855f7; color:white;">ق</div><div><div style="font-weight:bold; color:white;">ريبوت قناص</div><div style="font-size:0.7rem; color:#a855f7;">دقة عالية</div></div></div><div style="text-align:center;"><div style="font-weight:900; color:var(--accent-green); font-size:1.2rem;">+18%</div><div style="font-size:0.6rem; color:#888;">عائد شهري</div></div></div><p style="font-size:0.8rem; color:#ccc; margin-bottom:15px;">ينتظر الفرصة المثالية بصبر طويل. معدل صفقات قليل ولكن هامش ربح مرتفع. </p><button class="subscribe-btn" style="background:#334155; color:white;"
+    onclick="showBotDetails('قناص', 18)">تحليل الأداء 📊</button></div>< !-- Bot 5: Awatif (AI Assistant) --><div class="bot-card-pro"><div class="bot-card-header"><div style="display:flex; align-items:center; gap:10px;"><div class="avatar" style="background:#ec4899; color:white;">ع</div><div><div style="font-weight:bold; color:white;">مساعد عواطف</div><div style="font-size:0.7rem; color:#ec4899;">مساعد شخصي</div></div></div><div style="text-align:center;"><div style="font-weight:900; color:var(--accent-green); font-size:1.2rem;">--</div></div></div><p style="font-size:0.8rem; color:#ccc; margin-bottom:15px;">مساعدك الشخصي لإدارة المحفظة والإجابة عن استفساراتك حول السوق. </p><button class="subscribe-btn" style="background:#334155; color:white;"
+    onclick="showBotDetails('عواطف', 0)">تحدث الآن 💬</button></div></div></div>< !--==================VIEW 2.5: BOT DETAILS (CONVICTION)==================--><div id="view-bot-detail" class="view-section" style="padding-bottom:100px;"><header class="app-header"><button class="icon-btn" onclick="switchView('marketplace')">↩️ عودة</button><h3 style="margin:0; font-size:1rem;">تحليل الأداء</h3><div style="width:30px;"></div></header><div class="detail-header"><div class="avatar" id="detail-avatar"
+    style="width:60px; height:60px; font-size:1.5rem; margin:0 auto;"></div><h2 id="detail-name" style="margin:10px 0 5px;">--</h2><div class="detail-stat-big" id="detail-return">--%</div><p style="color:#888; font-size:0.8rem;">العائد التراكمي منذ بداية العام</p></div><div class="section-header"><h3>📈 الأداء الأسبوعي (مقارنة بالسوق)</h3></div><div class="chart-container">< !-- Mock Bars --><div class="chart-bar-group"><div class="chart-bar win" style="height:40%;"></div><span class="chart-label">أسبوع 1</span></div><div class="chart-bar-group"><div class="chart-bar win" style="height:60%;"></div><span class="chart-label">أسبوع 2</span></div><div class="chart-bar-group"><div class="chart-bar loss" style="height:20%;"></div><span class="chart-label">أسبوع 3</span></div><div class="chart-bar-group"><div class="chart-bar win" style="height:80%;"></div><span class="chart-label">أسبوع 4</span></div><div class="chart-bar-group"><div class="chart-bar win" style="height:90%;"></div><span class="chart-label">الحالي</span></div></div><div class="section-header"><h3>🧠 كيف أفكر؟ (المصادر)</h3></div><div class="source-grid"><div class="source-item"><i data-lucide="newspaper"></i><br>أخبار السوق</div><div class="source-item"><i data-lucide="bar-chart-2"></i><br>التحليل الفني</div><div class="source-item"><i data-lucide="globe"></i><br>الأسواق العالمية</div><div class="source-item"><i data-lucide="users"></i><br>حركة الملاك</div><div class="source-item"><i data-lucide="zap"></i><br>السيولة اللحظية</div><div class="source-item"><i data-lucide="shield"></i><br>إدارة المخاطر</div></div><div class="section-header"><h3>📜 سجل قرارات الأسبوع الماضي</h3></div><div class="proof-section" id="proof-list">< !-- Injected via JS --></div><div class="sticky-action"><button class="bank-btn" style="width:100%; box-shadow:0 0 20px rgba(251, 191, 36, 0.4);"
+    onclick="openBrokerModal()">اقتنعت ✅ (اربط المحفظة) </button></div></div>< !--==================MODAL: BROKER SELECTION==================--><div id="view-broker-modal" class="view-section" style="background:rgba(0,0,0,0.95); z-index:9999;"><header class="app-header"><button class="icon-btn" onclick="closeBrokerModal()">✖️ إلغاء</button><h3 style="margin:0;">ربط المحفظة</h3><div style="width:30px;"></div></header><div style="padding:20px; text-align:center;"><p style="color:#ccc; margin-bottom:30px;">اختر وسيطك المالي لمنح تصريح التداول</p><div class="broker-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:15px;"><button class="broker-card" onclick="connectBroker('الراجحي المالية', '#2563eb')"><div class="broker-logo" style="background:#2563eb;">AR</div><span>الراجحي المالية</span></button><button class="broker-card" onclick="connectBroker('الأهلي كابيتال', '#16a34a')"><div class="broker-logo" style="background:#16a34a;">SNB</div><span>الأهلي كابيتال</span></button><button class="broker-card" onclick="connectBroker('دراية المالية', '#a855f7')"><div class="broker-logo" style="background:#a855f7;">DY</div><span>دراية المالية</span></button><button class="broker-card" onclick="connectBroker('الرياض المالية', '#ca8a04')"><div class="broker-logo" style="background:#ca8a04;">RI</div><span>الرياض المالية</span></button></div><div id="connection-status" style="margin-top:40px; display:none;"><div class="loader-spinner"></div><p id="status-text" style="margin-top:20px; color:var(--accent-gold);">جاري الاتصال...</p></div></div></div>< !--==================VIEW 3: DASHBOARD==================--><div id="view-dashboard" class="view-section"><div id="insight-container"></div><header class="app-header"><div class="user-info"><div class="avatar" id="dash-avatar">AI</div><div><span class="greeting">محفظة نشطة</span><span class="status" id="dash-status">متصل بـ --</span></div></div><div style="display:flex; gap:10px;"><button class="icon-btn" id="explain-toggle" onclick="toggleExplain()"
+    style="color:var(--text-muted);"><i data-lucide="lightbulb"></i></button><button class="icon-btn" onclick="window.location.href='/verify'">🛡️</button></div></header><div class="balance-card"><div class="label">صافي قيمة الأصول</div><div class="amount" id="cash-display">10,
+    000 SAR</div><div class="change positive"><i data-lucide="activity"></i><span>يعمل الآن في السوق...</span></div></div><div class="section-header"><h3>📜 القرارات الحية</h3><span class="status" style="font-size:0.7rem;">تحديث لحظي</span></div><div class="feed-wrapper" style="margin: 0 20px 80px; height:auto; min-height:400px; padding-bottom:100px;"><div class="transactions-list" id="content-area"></div></div><button class="fab-chat" onclick="openChat()"><i data-lucide="mic"></i><span>اسأل الروبوت</span></button></div>< !-- Bottom Navigation (Native Feel) --><nav class="bottom-nav"><button class="nav-item active" onclick="switchView('onboarding')"><i data-lucide="home"></i><span>الرئيسية</span></button><button class="nav-item" onclick="switchView('marketplace')"><i data-lucide="grid"></i><span>السوق</span></button><button class="nav-item" onclick="switchView('dashboard')"><i data-lucide="pie-chart"></i><span>محفظتي</span></button><button class="nav-item" onclick="window.location.href='/live'"><i data-lucide="tv"></i><span>مباشر</span></button></nav></div>< !-- Chat Overlay --><div id="chat-modal"
+    style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; flex-direction:column; justify-content:flex-end;"><div style="background:var(--bg-card); height:85%; width:100%; border-radius:20px 20px 0 0; display:flex; flex-direction:column; max-width:480px; margin:0 auto;"><div style="padding:20px; border-bottom:1px solid #333; display:flex; justify-content:space-between; align-items:center;"><h3 style="margin:0; color:white;">المساعد الذكي</h3><button onclick="document.getElementById('chat-modal').style.display='none'"
+    style="background:none; border:none; color:white; font-size:1.5rem;">&times;
+    </button></div><div id="chat-history" style="flex:1; overflow-y:auto; padding:20px;"></div><div style="padding:20px; border-top:1px solid #333; display:flex; gap:10px;"><input type="text" id="chat-input" placeholder="اكتب رسالتك..."
+    style="flex:1; padding:12px; border-radius:10px; border:none; background:#0f172a; color:white;"><button onclick="sendMessage()"
+    style="background:var(--accent-green); color:black; border:none; padding:0 20px; border-radius:10px; font-weight:bold;">إرسال</button></div></div></div><script> // Global Error Handler for Mobile Debugging
+
+    window.onerror=function (msg, url, line) {
+        alert("Error: " + msg + "\nLine: " + line);
+    }
+
+    ;
+
+    lucide.createIcons();
+    let currentBot=null;
+    let explainMode=false;
+    let selectedBotForDetail=null;
+
+    // Bot Data Database
+    const botData= {
+        'صياد': {
+            slogan: "سهمك في المرمى 🏹",
+                strategyTitle: "Momentum Breakout (اختراق الزخم)",
+                scientificDesc: "يعتمد على خوارزميات 'Relative Strength Index' مع دمج أحجام التداول (Volume Weighted Analysis) لاكتشاف الأسهم التي بدأت في الانطلاق قبل دخول الجمهور."
+        }
+
+        ,
+        'رزين': {
+            slogan: "العقل قبل العاطفة ⚖️",
+                strategyTitle: "Value & Growth (القيمة والنمو)",
+                scientificDesc: "يستخدم تحليل القوائم المالية (P/E Ratio, EPS Growth) لتقييم السعر العادل للسهم، ويشتري فقط عندما يكون السعر السوقي أقل من القيمة الجوهرية (Intrinsic Value)."
+        }
+
+        ,
+        'مقدام': {
+            slogan: "قلب الأسد 🦁",
+                strategyTitle: "Volatility Scalping (اقتناص التذبذب)",
+                scientificDesc: "يعمل في الأسواق المتطرفة. يستخدم 'Bollinger Bands' و 'ATR' لتحديد نقاط الانعكاس السريعة في الأسهم الأكثر تذبذباً خلال الجلسة."
+        }
+
+        ,
+        'قناص': {
+            slogan: "طلقة واحدة تكفي 🎯",
+                strategyTitle: "Supply & Demand Zones (العرض والطلب)",
+                scientificDesc: "يراقب مناطق السيولة المؤسساتية (Smart Money Concepts). لا يتداول عشوائياً، بل يضع أوامر معلقة في مناطق 'Order Blocks' وينتظر السعر."
+        }
+
+        ,
+        'عواطف': {
+            slogan: "مساعدك الشخصي 🤖",
+                strategyTitle: "Natural Language Processing",
+                scientificDesc: "ذكاء اصطناعي توليدي مخصص للأسواق المالية، يحلل الأخبار والبيانات للإجابة على استفساراتك بشكل فوري."
+        }
+    }
+
+    ;
+
+    // View Switching (Simplified to prevent blank screen)
+    function switchView(viewName) {
+
+        // Hide all first
+        document.querySelectorAll('.view-section').forEach(el=> {
+                el.classList.remove('active');
+                el.style.display='none'; // Immediate hide
+            });
+
+        // Show target
+        const target=document.getElementById('view-' + viewName);
+
+        if (target) {
+            target.style.display='block';
+            // Force reflow to ensure display:block is applied before transition
+            void target.offsetWidth;
+            target.classList.add('active');
+        }
+
+        else {
+            console.error("View not found: " + viewName);
+        }
+
+        // Scroll to top
+        window.scrollTo(0, 0);
+    }
+
+    // --- NEW: Bot Details Logic ---
+    function showBotDetails(botName, returnVal) {
+        selectedBotForDetail=botName;
+
+        const data=botData[botName] || {
+            slogan: '', strategyTitle: 'General Strategy', scientificDesc: '...'
+        }
+
+        ;
+
+        // Populate Detials
+        document.getElementById('detail-name').innerText=`ريبوت $ {
+            botName
+        }
+
+        `;
+        document.getElementById('detail-avatar').innerText=botName[0];
+
+        // Handle return val display
+        if (returnVal > 0) {
+            document.getElementById('detail-return').innerText=`+$ {
+                returnVal
             }
 
-            // Inject Slogan
-            const sloganContainer = document.getElementById('detail-slogan');
-            if (sloganContainer) sloganContainer.innerText = data.slogan;
-            else {
-                // If element doesn't exist yet (first run), creates it
-                const header = document.querySelector('.detail-header');
-                const slg = document.createElement('div');
-                slg.id = 'detail-slogan';
-                slg.style.color = 'var(--accent-gold)';
-                slg.style.fontStyle = 'italic';
-                slg.style.marginBottom = '10px';
-                slg.innerText = data.slogan;
-                header.insertBefore(slg, document.getElementById('detail-return'));
-            }
+            %`;
+            document.getElementById('detail-return').style.color='var(--accent-green)';
+        }
 
-            // Inject Scientific Strategy Box
-            const stratContainer = document.getElementById('detail-strategy-box');
-            console.log("Strat data: ", data);
-            const stratHTML = `
-                <div style="background:rgba(255,255,255,0.05); padding:15px; border-radius:12px; margin:20px; border:1px solid var(--border-color); text-align:right;">
-                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:10px;">
-                        <i data-lucide="cpu" style="color:var(--accent-gold);"></i>
-                        <span style="font-weight:bold; color:white; font-size:0.9rem;">${data.strategyTitle}</span>
-                    </div>
-                    <p style="font-size:0.8rem; color:#ccc; line-height:1.6; margin:0;">
-                        ${data.scientificDesc}
-                    </p>
-                </div>
-            `;
+        else {
+            document.getElementById('detail-return').innerText=`--`;
+            document.getElementById('detail-return').style.color='var(--text-muted)';
+        }
 
-            if (stratContainer) {
-                stratContainer.innerHTML = stratHTML;
-            } else {
-                const newDiv = document.createElement('div');
-                newDiv.id = 'detail-strategy-box';
-                newDiv.innerHTML = stratHTML;
-                const parent = document.querySelector('#view-bot-detail');
-                // Insert after header
-                parent.insertBefore(newDiv, document.querySelector('.section-header'));
-                lucide.createIcons();
-            }
+        // Inject Slogan
+        const sloganContainer=document.getElementById('detail-slogan');
+        if (sloganContainer) sloganContainer.innerText=data.slogan;
 
-            // Mock Proof List
-            const list = document.getElementById('proof-list');
-            list.innerHTML = `
-                <div class="proof-item proof-win">
-                    <div>
-                        <div style="font-weight:bold;">شراء أرامكو (ARAMCO)</div>
-                        <div style="color:#888; font-size:0.75rem;">السبب: اختراق مقاومة قوية + أخبار إيجابية</div>
-                    </div>
-                    <div style="text-align:left;">
-                        <div style="color:var(--accent-green);">+2.5%</div>
-                        <div style="font-size:0.7rem;">الثلاثاء</div>
-                    </div>
-                </div>
-                <div class="proof-item proof-loss">
-                    <div>
-                        <div style="font-weight:bold;">وقف خسارة الراجحي</div>
-                        <div style="color:#888; font-size:0.75rem;">السبب: هبوط فجائي للسوق</div>
-                    </div>
-                    <div style="text-align:left;">
-                        <div style="color:var(--accent-red);">-0.8%</div>
-                        <div style="font-size:0.7rem;">الأربعاء</div>
-                    </div>
-                </div>
-                <div class="proof-item proof-win">
-                    <div>
-                        <div style="font-weight:bold;">بيع سابق (SABIC)</div>
-                        <div style="color:#888; font-size:0.75rem;">السبب: الوصول للهدف السعري</div>
-                    </div>
-                    <div style="text-align:left;">
-                        <div style="color:var(--accent-green);">+1.2%</div>
-                        <div style="font-size:0.7rem;">الخميس</div>
-                    </div>
-                </div>
-            `;
+        else {
+            // If element doesn't exist yet (first run), creates it
+            const header=document.querySelector('.detail-header');
+            const slg=document.createElement('div');
+            slg.id='detail-slogan';
+            slg.style.color='var(--accent-gold)';
+            slg.style.fontStyle='italic';
+            slg.style.marginBottom='10px';
+            slg.innerText=data.slogan;
+            header.insertBefore(slg, document.getElementById('detail-return'));
+        }
 
-            switchView('bot-detail');
+        // Inject Scientific Strategy Box
+        const stratContainer=document.getElementById('detail-strategy-box');
+        console.log("Strat data: ", data);
+
+        const stratHTML=` <div style="background:rgba(255,255,255,0.05); padding:15px; border-radius:12px; margin:20px; border:1px solid var(--border-color); text-align:right;"><div style="display:flex; align-items:center; gap:10px; margin-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:10px;"><i data-lucide="cpu" style="color:var(--accent-gold);"></i><span style="font-weight:bold; color:white; font-size:0.9rem;">$ {
+            data.strategyTitle
+        }
+
+        </span></div><p style="font-size:0.8rem; color:#ccc; line-height:1.6; margin:0;">$ {
+            data.scientificDesc
+        }
+
+        </p></div>`;
+
+        if (stratContainer) {
+            stratContainer.innerHTML=stratHTML;
+        }
+
+        else {
+            const newDiv=document.createElement('div');
+            newDiv.id='detail-strategy-box';
+            newDiv.innerHTML=stratHTML;
+            const parent=document.querySelector('#view-bot-detail');
+            // Insert after header
+            parent.insertBefore(newDiv, document.querySelector('.section-header'));
             lucide.createIcons();
         }
 
-        // --- Broker Connection Logic ---
-        function openBrokerModal() {
-            switchView('broker-modal'); // Reusing switchView to show it as a layer
-        }
+        // Mock Proof List
+        const list=document.getElementById('proof-list');
+        list.innerHTML=` <div class="proof-item proof-win"><div><div style="font-weight:bold;">شراء أرامكو (ARAMCO)</div><div style="color:#888; font-size:0.75rem;">السبب: اختراق مقاومة قوية+أخبار إيجابية</div></div><div style="text-align:left;"><div style="color:var(--accent-green);">+2.5%</div><div style="font-size:0.7rem;">الثلاثاء</div></div></div><div class="proof-item proof-loss"><div><div style="font-weight:bold;">وقف خسارة الراجحي</div><div style="color:#888; font-size:0.75rem;">السبب: هبوط فجائي للسوق</div></div><div style="text-align:left;"><div style="color:var(--accent-red);">-0.8%</div><div style="font-size:0.7rem;">الأربعاء</div></div></div><div class="proof-item proof-win"><div><div style="font-weight:bold;">بيع سابق (SABIC)</div><div style="color:#888; font-size:0.75rem;">السبب: الوصول للهدف السعري</div></div><div style="text-align:left;"><div style="color:var(--accent-green);">+1.2%</div><div style="font-size:0.7rem;">الخميس</div></div></div>`;
 
-        function closeBrokerModal() {
-            switchView('bot-detail');
-        }
+        switchView('bot-detail');
+        lucide.createIcons();
+    }
 
-        function connectBroker(brokerName, color) {
-            const statusDiv = document.getElementById('connection-status');
-            const statusText = document.getElementById('status-text');
-            const grid = document.querySelector('.broker-grid');
+    // --- Broker Connection Logic ---
+    function openBrokerModal() {
+        switchView('broker-modal'); // Reusing switchView to show it as a layer
+    }
 
-            grid.style.opacity = '0.3';
-            grid.style.pointerEvents = 'none';
-            statusDiv.style.display = 'block';
+    function closeBrokerModal() {
+        switchView('bot-detail');
+    }
 
-            // Persistence: Save to LocalStorage
-            localStorage.setItem('user_broker', brokerName);
-            localStorage.setItem('user_bot', selectedBotForDetail);
-            localStorage.setItem('user_color', color);
+    function connectBroker(brokerName, color) {
+        const statusDiv=document.getElementById('connection-status');
+        const statusText=document.getElementById('status-text');
+        const grid=document.querySelector('.broker-grid');
 
-            // Simulation Sequence
-            setTimeout(() => { statusText.innerText = "جاري المصادقة مع النفاذ الوطني..."; }, 1500);
-            setTimeout(() => { statusText.innerText = `جاري جلب المحفظة من ${brokerName}...`; }, 3500);
-            setTimeout(() => {
-                statusText.innerText = "تم الاتصال بنجاح! ✅";
-                statusText.style.color = "var(--accent-green)";
-            }, 5500);
+        grid.style.opacity='0.3';
+        grid.style.pointerEvents='none';
+        statusDiv.style.display='block';
 
-            setTimeout(() => {
+        // Persistence: Save to LocalStorage
+        localStorage.setItem('user_broker', brokerName);
+        localStorage.setItem('user_bot', selectedBotForDetail);
+        localStorage.setItem('user_color', color);
+
+        // Simulation Sequence
+        setTimeout(()=> {
+                statusText.innerText="جاري المصادقة مع النفاذ الوطني...";
+            }
+
+            , 1500);
+
+        setTimeout(()=> {
+                statusText.innerText=`جاري جلب المحفظة من $ {
+                    brokerName
+                }
+
+                ...`;
+            }
+
+            , 3500);
+
+        setTimeout(()=> {
+                statusText.innerText="تم الاتصال بنجاح! ✅";
+                statusText.style.color="var(--accent-green)";
+            }
+
+            , 5500);
+
+        setTimeout(()=> {
                 // Reset UI
-                statusDiv.style.display = 'none';
-                grid.style.opacity = '1';
-                grid.style.pointerEvents = 'auto';
+                statusDiv.style.display='none';
+                grid.style.opacity='1';
+                grid.style.pointerEvents='auto';
 
                 // Finalize
                 subscribe(selectedBotForDetail);
-            }, 6500);
-        }
-
-        // Check Persistence on Load
-        window.onload = function () {
-            lucide.createIcons();
-            const savedBot = localStorage.getItem('user_bot');
-            const savedBroker = localStorage.getItem('user_broker');
-
-            if (savedBot && savedBroker) {
-                // Auto-login logic
-                console.log("Restoring session for: " + savedBot);
-                // We don't auto-switch to dashboard to allow them to see the landing, 
-                // but we update the state so when they click "My Portfolio" it works.
-                currentBot = savedBot;
-                updateDashboardUI(savedBot);
-                // Create a small "Welcome Back" toast?
-                setTimeout(() => showInsight(`أهلاً بك مجدداً! محفظتك متصلة بـ ${savedBot}`), 2000);
             }
-        };
 
-        function confirmSubscribe() {
-            // Deprecated, redirected to openBrokerModal
-            openBrokerModal();
+            , 6500);
+    }
+
+    // Check Persistence on Load
+    window.onload=function () {
+        lucide.createIcons();
+        const savedBot=localStorage.getItem('user_bot');
+        const savedBroker=localStorage.getItem('user_broker');
+
+        if (savedBot && savedBroker) {
+            // Auto-login logic
+            console.log("Restoring session for: " + savedBot);
+            // We don't auto-switch to dashboard to allow them to see the landing, 
+            // but we update the state so when they click "My Portfolio" it works.
+            currentBot=savedBot;
+            updateDashboardUI(savedBot);
+
+            // Create a small "Welcome Back" toast?
+            setTimeout(()=> showInsight(`أهلاً بك مجدداً ! محفظتك متصلة بـ $ {
+                        savedBot
+                    }
+
+                    `), 2000);
         }
+    }
 
-        function subscribe(botName) {
-            // Safety Check
-            if (!botName) botName = "المساعد الذكي";
-            currentBot = botName;
+    ;
 
-            updateDashboardUI(botName);
+    function confirmSubscribe() {
+        // Deprecated, redirected to openBrokerModal
+        openBrokerModal();
+    }
 
-            // Switch first, then load data
-            switchView('dashboard');
+    function subscribe(botName) {
+        // Safety Check
+        if ( !botName) botName="المساعد الذكي";
+        currentBot=botName;
 
-            // Show toast instead of alert for smoother flow
-            showInsight(`تم ربط المحفظة بنجاح مع ${botName}! 🚀`);
+        updateDashboardUI(botName);
 
-            loadStrategy(botName);
+        // Switch first, then load data
+        switchView('dashboard');
 
-            toggleExplain();
-            setTimeout(() => {
+        // Show toast instead of alert for smoother flow
+        showInsight(`تم ربط المحفظة بنجاح مع $ {
+                botName
+            }
+
+            ! 🚀`);
+
+        loadStrategy(botName);
+
+        toggleExplain();
+
+        setTimeout(()=> {
                 showInsight("جاري تحليل السيولة الداخلة الآن...");
-            }, 1000);
+            }
+
+            , 1000);
+    }
+
+    function updateDashboardUI(botName) {
+        // Update Dashboard UI (Safety checks for elements)
+        const avatar=document.getElementById('dash-avatar');
+        if (avatar) avatar.innerText=botName[0];
+
+        const status=document.getElementById('dash-status');
+
+        if (status) status.innerText=`متصل بـ $ {
+            botName
         }
 
-        function updateDashboardUI(botName) {
-            // Update Dashboard UI (Safety checks for elements)
-            const avatar = document.getElementById('dash-avatar');
-            if (avatar) avatar.innerText = botName[0];
+        `;
 
-            const status = document.getElementById('dash-status');
-            if (status) status.innerText = `متصل بـ ${botName}`;
+        const chatBtn=document.querySelector('.fab-chat span');
 
-            const chatBtn = document.querySelector('.fab-chat span');
-            if (chatBtn) chatBtn.innerText = `اسأل ${botName}`;
+        if (chatBtn) chatBtn.innerText=`اسأل $ {
+            botName
         }
 
-        function toggleExplain() {
-            explainMode = !explainMode;
-            const btn = document.getElementById('explain-toggle');
-            if (btn) {
-                if (explainMode) {
-                    btn.style.color = 'var(--accent-gold)';
-                    startSimulation();
-                } else {
-                    btn.style.color = 'var(--text-muted)';
-                }
+        `;
+    }
+
+    function toggleExplain() {
+        explainMode= !explainMode;
+        const btn=document.getElementById('explain-toggle');
+
+        if (btn) {
+            if (explainMode) {
+                btn.style.color='var(--accent-gold)';
+                startSimulation();
+            }
+
+            else {
+                btn.style.color='var(--text-muted)';
             }
         }
+    }
 
-        function showInsight(text) {
-            const container = document.getElementById('insight-container');
-            if (!container) return;
+    function showInsight(text) {
+        const container=document.getElementById('insight-container');
+        if ( !container) return;
 
-            const bubble = document.createElement('div');
-            bubble.className = 'insight-bubble';
-            bubble.innerHTML = `
-                <div style="color:var(--accent-gold);"><i data-lucide="info"></i></div>
-                <div style="font-size:0.85rem; color:white; line-height:1.4;">${text}</div>
-            `;
-            container.appendChild(bubble);
-            if (window.lucide) lucide.createIcons();
+        const bubble=document.createElement('div');
+        bubble.className='insight-bubble';
 
-            setTimeout(() => {
-                bubble.style.opacity = '0';
-                bubble.style.top = '-100px';
-                setTimeout(() => bubble.remove(), 500);
-            }, 6000);
+        bubble.innerHTML=` <div style="color:var(--accent-gold);"><i data-lucide="info"></i></div><div style="font-size:0.85rem; color:white; line-height:1.4;">$ {
+            text
         }
 
-        function startSimulation() {
-            if (!explainMode) return;
-            setTimeout(() => {
+        </div>`;
+        container.appendChild(bubble);
+        if (window.lucide) lucide.createIcons();
+
+        setTimeout(()=> {
+                bubble.style.opacity='0';
+                bubble.style.top='-100px';
+                setTimeout(()=> bubble.remove(), 500);
+            }
+
+            , 6000);
+    }
+
+    function startSimulation() {
+        if ( !explainMode) return;
+
+        setTimeout(()=> {
                 if (explainMode) showInsight(`تحليل: لاحظت سيولة عالية في قطاع البنوك.`);
                 if (explainMode) startSimulation();
-            }, 15000);
-        }
+            }
 
-        async function loadStrategy(name) {
-            const container = document.getElementById('content-area');
-            if (!container) return;
+            , 15000);
+    }
 
-            container.innerHTML = '<div style="text-align:center; padding:20px; color:#aaa;"> جارِ جلب البيانات...</div>';
-            try {
-                const res = await fetch(`/api/portfolio/${encodeURIComponent(name)}`);
-                if (!res.ok) throw new Error("API Error");
+    async function loadStrategy(name) {
+        const container=document.getElementById('content-area');
+        if ( !container) return;
 
-                const data = await res.json();
-                const cashDisplay = document.getElementById('cash-display');
-                if (cashDisplay && data.cash) cashDisplay.innerText = data.cash.toFixed(2) + " SAR";
+        // Skeleton Loading UI (Visual Excellence)
+        container.innerHTML=` <div style="padding:15px;"><div class="skeleton skeleton-text" style="width:60%;"></div><div class="skeleton skeleton-box" style="margin-bottom:15px;"></div><div class="skeleton skeleton-box" style="margin-bottom:15px;"></div><div class="skeleton skeleton-box" style="margin-bottom:15px;"></div></div>`;
 
-                if (data.history && data.history.length > 0) {
-                    container.innerHTML = data.history.slice().reverse().map(t => {
-                        return `
-                        <div class="trx-item ${t.action === 'BUY' ? 'buy' : 'sell'}">
-                            <div class="trx-details" style="flex-direction:column; gap:5px; width:100%;">
-                                <div style="display:flex; justify-content:space-between;">
-                                    <span class="strategy-tag ${t.action === 'BUY' ? 'green' : 'red'}">${t.action}</span>
-                                    <span class="symbol-text">${t.symbol}</span>
-                                    <span class="trx-price">${t.price.toFixed(2)}</span>
-                                </div>
-                                <div style="font-size:0.85rem; color:#ccc; display:flex; align-items:center; gap:5px;">
-                                    <i data-lucide="cpu" style="width:12px;"></i> ${t.reason}
-                                </div>
-                            </div>
-                        </div>
-                        `;
-                    }).join('');
-                    if (window.lucide) lucide.createIcons();
-                } else {
-                    container.innerHTML = '<div style="text-align:center; padding:20px; color:#666;">لا توجد صفقات حالياً.</div>';
+        try {
+            const res=await fetch(`/api/portfolio/$ {
+                    encodeURIComponent(name)
                 }
-            } catch (e) {
-                console.error(e);
-                container.innerHTML = '<div style="text-align:center; color:red;">خطأ في الاتصال بالسيرفر</div>';
+
+                `);
+            if ( !res.ok) throw new Error("API Error");
+
+            const data=await res.json();
+            const cashDisplay=document.getElementById('cash-display');
+            if (cashDisplay && data.cash) cashDisplay.innerText=data.cash.toFixed(2)+" SAR";
+
+            if (data.history && data.history.length > 0) {
+                container.innerHTML=data.history.slice().reverse().map(t=> {
+                        return ` <div class="trx-item ${t.action === 'BUY' ? 'buy' : 'sell'}" > <div class="trx-details" style="flex-direction:column; gap:5px; width:100%;" > <div style="display:flex; justify-content:space-between;" > <span class="strategy-tag ${t.action === 'BUY' ? 'green' : 'red'}" >$ {
+                            t.action
+                        }
+
+                        </span> <span class="symbol-text" >$ {
+                            t.symbol
+                        }
+
+                        </span> <span class="trx-price" >$ {
+                            t.price.toFixed(2)
+                        }
+
+                        </span> </div> <div style="font-size:0.85rem; color:#ccc; display:flex; align-items:center; gap:5px;" > <i data-lucide="cpu" style="width:12px;" ></i> $ {
+                            t.reason
+                        }
+
+                        </div> </div> </div> `;
+                    }).join('');
+                if (window.lucide) lucide.createIcons();
+            }
+
+            else {
+                container.innerHTML='<div style="text-align:center; padding:20px; color:#666;">لا توجد صفقات حالياً.</div>';
             }
         }
 
-        function openChat() {
-            const modal = document.getElementById('chat-modal');
-            if (modal) modal.style.display = 'flex';
+        catch (e) {
+            console.error(e);
+            container.innerHTML='<div style="text-align:center; color:red;">خطأ في الاتصال بالسيرفر</div>';
+        }
+    }
+
+    function openChat() {
+        const modal=document.getElementById('chat-modal');
+        if (modal) modal.style.display='flex';
+    }
+
+    async function sendMessage() {
+        const inp=document.getElementById('chat-input');
+        const txt=inp.value;
+        if ( !txt) return;
+        const hist=document.getElementById('chat-history');
+
+        hist.innerHTML+=`<div style="text-align:right; margin-bottom:10px;"><span style="background:#334155; padding:8px 12px; border-radius:15px 15px 0 15px; display:inline-block;">$ {
+            txt
         }
 
-        async function sendMessage() {
-            const inp = document.getElementById('chat-input');
-            const txt = inp.value;
-            if (!txt) return;
-            const hist = document.getElementById('chat-history');
-            hist.innerHTML += `<div style="text-align:right; margin-bottom:10px;"><span style="background:#334155; padding:8px 12px; border-radius:15px 15px 0 15px; display:inline-block;">${txt}</span></div>`;
-            inp.value = '';
-            try {
-                const res = await fetch('/api/chat', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ persona: currentBot || 'General', message: txt })
-                });
-                const d = await res.json();
-                hist.innerHTML += `<div style="text-align:left; margin-bottom:10px;"><span style="background:var(--accent-green); color:black; padding:8px 12px; border-radius:15px 15px 15px 0; display:inline-block;">${d.response}</span></div>`;
-            } catch (e) { }
-        }
-    </script>
-</body>
+        </span></div>`;
+        inp.value='';
 
-</html>
+        try {
+            const res=await fetch('/api/chat', {
+
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+
+                ,
+                body: JSON.stringify({
+                    persona: currentBot || 'General', message: txt
+                })
+        });
+    const d=await res.json();
+
+    hist.innerHTML+=`<div style="text-align:left; margin-bottom:10px;"><span style="background:var(--accent-green); color:black; padding:8px 12px; border-radius:15px 15px 15px 0; display:inline-block;">$ {
+        d.response
+    }
+
+    </span></div>`;
+    }
+
+    catch (e) {}
+    }
+
+    </script></body></html>
