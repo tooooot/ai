@@ -111,6 +111,10 @@ def live_broadcast():
 def mobile_app_view():
     return render_template('mobile_app.html')
 
+@app.route('/debug/routes')
+def debug_routes():
+    return str(app.url_map)
+
 @app.route('/verify')
 def verify_view():
     return render_template('verify.html')
