@@ -1,2 +1,11 @@
 flask
+yfinance
+pandas
+numpy
+ta
+requests
+beautifulsoup4
+textblob
+schedule
+python-dotenv
 gunicorn
