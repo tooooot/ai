@@ -1,5 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
+# Ensure we don't depend on lxml
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning, module='bs4')
 from textblob import TextBlob
 import random
 

@@ -9,4 +9,3 @@ textblob
 schedule
 python-dotenv
 gunicorn
-lxml
