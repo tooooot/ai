@@ -4,278 +4,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AI Private Banking Terminal</title>
+    <title>بث الذكاء الاصطناعي - مباشر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <!-- Professional Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=IBM+Plex+Sans+Arabic:wght@300;400;600&display=swap"
-        rel="stylesheet">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body class="bank-theme">
 
-    <!-- Audio Overlay Removed -->
-    <!-- System will attempt auto-play, browser policy permitting -->
+    <!-- Video Background -->
+    <div class="video-bg">
+        <video autoplay muted loop playsinline id="bg-video">
+            <!-- You can swap this URL with any cyber/abstract background -->
+            <source
+                src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-a-futuristic-city-interface-12977-large.mp4"
+                type="video/mp4">
+        </video>
+        <div style="position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(2, 6, 23, 0.85);"></div>
+    </div>
 
-    <div class="tiktok-container">
+    <!-- Main Screen Layout 8 -->
+    <div class="screen l8">
 
-        <!-- 1. Header & Explainer -->
-        <header class="bank-header">
-            <div class="header-content">
-                <h1 class="main-title">
-                    شاهد الذكاء الاصطناعي يتداول <br>
-                    <span class="highlight-gold">في السوق السعودي</span>
-                </h1>
+        <!-- 1. Headline -->
+        <div class="headline-main">شاهد الذكاء الاصطناعي يتداول في السوق السعودي 🇸🇦</div>
+        <div class="sub-ticker">
+            <span>نظام ذكي - صفقات رابحة - الرابط في البايو لانضمام فوري - تابع البث المباشر - اربح مع النخبة</span>
+        </div>
 
-                <!-- Smart Explainer Carousel -->
-                <div class="smart-carousel">
-                    <div class="carousel-track" id="explainer-track">
-                        <!-- Text injected via JS -->
-                        <div class="carousel-item active">🤖 لأول مرة: 6 استراتيجيات تتنافس أمامك مباشرة</div>
-                    </div>
+        <!-- 2. Header Row -->
+        <div class="header-row">
+            <span class="live-badge">مباشر 🔴</span>
+            <span class="timer-badge" id="campaign-timer">00:00:00</span>
+        </div>
+
+        <!-- 3. Active Bot Card (Data Dense) -->
+        <div class="active-bot-card">
+            <div>
+                <div style="color:var(--accent-gold); font-weight:bold; font-size:1.1rem;" id="active-bot-name">--</div>
+                <div class="hero-label">البوت النشط</div>
+                <div style="font-size:0.7rem; color:#cbd5e1; margin-top:4px;">
+                    🎯 دقة: <span id="active-bot-accuracy" class="gold">--%</span> |
+                    💰 رصيد: <span id="active-bot-balance">--</span>
                 </div>
             </div>
-
-            <div class="live-indicator">
-                <span class="dot"></span> بث حي
-            </div>
-        </header>
-
-        <!-- Market Ticker (moved below header for better flow) -->
-        <div class="market-ticker-wrap">
-            <div class="market-ticker">
-                <span>TASI: <b class="green">12,450 ▲</b></span>
-                <span>OIL: <b class="green">82.40 ▲</b></span>
-                <span>GOLD: <b class="red">2,350 ▼</b></span>
-                <span>AI SENTIMENT: <b class="gold">Bullish</b></span>
+            <div style="text-align:left;">
+                <div style="font-size:1.8rem; font-weight:bold; direction:ltr;" id="active-bot-return">--%</div>
+                <div class="hero-label">العائد اليومي</div>
             </div>
         </div>
 
-        <!-- AI Logic Terminal (Transparency Engine) -->
-        <div class="logic-terminal-wrap">
-            <div class="terminal-header">
-                <span class="blink-dot"></span>
-                LIVE AI LOGIC STREAM (v2.4 Core)
+        <!-- 4. RACE TRACK FEATURE -->
+        <div class="race-track-container">
+            <div class="race-header">
+                <span>🏎️ سباق العمالقة</span>
+                <span>الهدف: 20%</span>
             </div>
-            <div class="terminal-content" id="ai-logic-feed">
-                <div class="log-line"><span class="cmd">> SYSTEM:</span> Connecting to Market Data Stream...</div>
-                <div class="log-line"><span class="cmd">> CORE:</span> Loading 10 Strategy Modules...</div>
-            </div>
-        </div>
-
-        <!-- Heatmap Section -->
-
-
-        <!-- 2. Prime Leaderboard (Top Strategies) -->
-        <section class="section-title">
-            <h3>أداء المحافظ الاستثمارية</h3>
-        </section>
-
-        <section class="prime-board" id="prime-board">
-            <!-- Injected via JS -->
-            <div class="loading-spinner">جاري الاتصال بالخوادم...</div>
-        </section>
-
-        <!-- 3. Real-Time Transaction Feed -->
-        <section class="section-title">
-            <h3>سجل العمليات الفورية</h3>
-        </section>
-
-        <div class="feed-wrapper">
-            <div class="transactions-list" id="trade-feed">
-                <!-- Injected via JS -->
+            <div class="race-lines" id="race-track">
+                <!-- Racers will be injected here via JS -->
             </div>
         </div>
 
-        <!-- 4. Footer / Safe Zone -->
-        <footer class="bank-footer">
-            <div id="qrcode" class="qr-code"></div>
-            <div class="footer-text">
-                <p>امسح الكود عبر الكاميرا</p>
-                <p class="disclaimer">بيانات محاكاة لأغراض العرض فقط.</p>
+        <!-- 5. Dual Leaderboard -->
+        <div class="leaderboard-container">
+            <div class="leader-card">
+                <div class="leader-title">👑 الأكثر ربحاً</div>
+                <div class="leader-val" id="top-profit-bot">--</div>
             </div>
-        </footer>
+            <div class="leader-card">
+                <div class="leader-title">🎯 الأدق صفقة</div>
+                <div class="leader-val" id="top-accuracy-bot">--</div>
+            </div>
+        </div>
+
+        <!-- 6. Roster Ticker -->
+        <div class="roster-ticker">
+            <span class="roster-label">بقية السوق: </span>
+            <span class="roster-content" id="roster-content">
+                <!-- Ticker items injected here -->
+            </span>
+        </div>
+
+        <!-- 7. Events Log -->
+        <div class="events-log" id="events-log">
+            <div class="log-item">-- جاري الاتصال بالسوق --</div>
+        </div>
 
     </div>
 
-    <!-- Hidden audio element for cues -->
-    <audio id="alert-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-software-interface-start-2574.mp3"
-        preload="auto"></audio>
-
+    <!-- JavaScript Logic -->
     <script>
-        // --- State ---
-        let audioEnabled = false;
-        let lastTradeHash = "";
+        lucide.createIcons();
 
-        // --- Explainer Logic ---
-        const explainerTexts = [
-            "🤖 لأول مرة: 6 استراتيجيات ذكاء اصطناعي تتنافس أمامك مباشرة.",
-            "📊 النظام يحلل بيانات 200 شركة سعودية في جزء من الثانية.",
-            "💡 قرارات بيع وشراء آلية بالكامل.. بدون أي تدخل بشري.",
-            "📈 لا نعتمد على الحظ.. نعتمد على الخوارزميات والبيانات الضخمة.",
-            "🏛️ استراتيجيات متنوعة: من المضاربة اللحظية إلى الاستثمار الآمن."
-        ];
+        // --- Timer Logic ---
+        function updateTimer() {
+            const now = new Date();
+            const end = new Date();
+            end.setHours(23, 59, 59);
+            const diff = end - now;
 
-        let currentExplainerIdx = 0;
+            const h = Math.floor(diff / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
 
-        function rotateExplainer() {
-            const track = document.getElementById('explainer-track');
-            track.style.opacity = '0';
-
-            setTimeout(() => {
-                currentExplainerIdx = (currentExplainerIdx + 1) % explainerTexts.length;
-                track.innerHTML = `<div class="carousel-item">${explainerTexts[currentExplainerIdx]}</div>`;
-                track.style.opacity = '1';
-            }, 500);
+            document.getElementById('campaign-timer').innerText =
+                `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
         }
-        setInterval(rotateExplainer, 5000);
+        setInterval(updateTimer, 1000);
 
-        // --- Interactions ---
-        // --- Interactions ---
-        // Auto-Enable best effort
-        setTimeout(() => {
-            audioEnabled = true;
-            speak("بدء البث الحي للذكاء الاصطناعي.", "system");
-        }, 1000);
-
-        // --- Heatmap Logic ---
-
-
-
-        // --- Core Logic ---
-        async function fetchLiveData() {
+        // --- Data Fetching & UI Update ---
+        async function fetchData() {
             try {
                 const response = await fetch('/api/live_data');
                 const data = await response.json();
 
-                renderLeaderboard(data.leaderboard);
-                renderFeed(data.recent_trades);
-                renderLogicTerminal(data.leaderboard);
-
-
-
-                lucide.createIcons();
-
-            } catch (error) {
-                console.error("Data Stream Error", error);
-            }
-        }
-
-        let lastProcessedLogs = {};
-
-        function renderLogicTerminal(strategies) {
-            const terminal = document.getElementById('ai-logic-feed');
-
-            strategies.forEach(s => {
-                const lastLog = s.last_log || "Initializing...";
-                if (lastProcessedLogs[s.name] !== lastLog) {
-                    lastProcessedLogs[s.name] = lastLog;
-
-                    const line = document.createElement('div');
-                    line.className = 'log-line';
-                    line.innerHTML = `<span class="cmd">> ${s.name}:</span> ${lastLog}`;
-                    terminal.appendChild(line);
-                    terminal.scrollTop = terminal.scrollHeight;
+                if (data) {
+                    updateUI(data);
                 }
-            });
-
-            while (terminal.children.length > 50) {
-                terminal.removeChild(terminal.firstChild);
+            } catch (err) {
+                console.error("API Error:", err);
             }
         }
 
-        function renderLeaderboard(strategies) {
-            const container = document.getElementById('prime-board');
-            const sorted = [...strategies].sort((a, b) => b.return - a.return);
+        function updateUI(data) {
+            const leaders = data.leaderboard || [];
 
-            container.innerHTML = sorted.map((item, index) => {
-                const isPositive = item.return >= 0;
-                const progressWidth = Math.min(Math.abs(item.return) * 2, 100);
+            if (leaders.length > 0) {
+                // 1. Update Active Bot (Show #1 or rotate)
+                // For simplicity, let's show the #1 bot as Active, or Cycle them?
+                // Users usually like to see the Winner. Let's show Rank 1.
+                const topBot = leaders[0];
+                document.getElementById('active-bot-name').innerText = topBot.name;
 
-                return `
-                <div class="fund-row">
-                    <div class="fund-rank">${index + 1}</div>
-                    <div class="fund-info">
-                        <div class="fund-name">${item.name}</div>
-                        <div class="fund-bar-bg">
-                            <div class="fund-bar-fill ${isPositive ? 'pos' : 'neg'}" style="width: ${progressWidth}%"></div>
-                        </div>
-                    </div>
-                    <div class="fund-return ${isPositive ? 'green' : 'red'}">
-                        ${isPositive ? '+' : ''}${item.return.toFixed(2)}%
-                    </div>
-                </div>
+                // Simulate Accuracy based on return (for demo/visuals)
+                const acc = Math.min(99, 85 + (topBot.return * 2));
+                document.getElementById('active-bot-accuracy').innerText = acc.toFixed(1) + '%';
+
+                // Colorize Return
+                const retEl = document.getElementById('active-bot-return');
+                retEl.innerText = (topBot.return > 0 ? '+' : '') + topBot.return.toFixed(2) + '%';
+                retEl.style.color = topBot.return >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
+
+                // Balance (mock or real if available)
+                document.getElementById('active-bot-balance').innerText = (10000 + (topBot.return * 100)).toLocaleString();
+
+                // 2. Update Race Track
+                updateRaceTrack(leaders);
+
+                // 3. Update Leaderboard Cards
+                // Top Profit = Rank 1
+                document.getElementById('top-profit-bot').innerHTML =
+                    `<span class="green">${topBot.name} ${topBot.return.toFixed(1)}%</span>`;
+
+                // Top Accuracy (Mock logic: usually bot with small steady gains)
+                // Let's pick Rank 2 as "Accurate" for variety if exists
+                const accBot = leaders.length > 1 ? leaders[1] : leaders[0];
+                document.getElementById('top-accuracy-bot').innerHTML =
+                    `<span class="gold">${accBot.name} 95%</span>`;
+
+                // 4. Update Ticker (Rest of bots)
+                let tickerHtml = '';
+                leaders.slice(2).forEach((bot, i) => {
+                    const colorClass = bot.return >= 0 ? 'roster-up' : 'roster-down';
+                    tickerHtml += `<span class="roster-item">#${i + 3} ${bot.name} <b class="${colorClass}">${bot.return.toFixed(1)}%</b></span>`;
+                });
+                document.getElementById('roster-content').innerHTML = tickerHtml;
+            }
+
+            // 5. Update Events Log
+            if (data.recent_trades && data.recent_trades.length > 0) {
+                const logContainer = document.getElementById('events-log');
+                logContainer.innerHTML = ''; // Clear old
+                data.recent_trades.slice(0, 5).forEach(trade => {
+                    const div = document.createElement('div');
+                    div.className = 'log-item';
+                    const color = trade.action === 'BUY' ? 'green' : 'red';
+                    // Example: > شراء أرامكو 32.50
+                    div.innerHTML = `> <span class="${color}">${trade.action === 'BUY' ? 'شراء' : 'بيع'}</span> ${trade.symbol} <span style="float:left">${trade.price}</span>`;
+                    logContainer.appendChild(div);
+                });
+            }
+        }
+
+        function updateRaceTrack(leaders) {
+            const track = document.getElementById('race-track');
+            track.innerHTML = ''; // Re-render
+
+            // We need a finish line concept. Let's say 20% return is the finish line.
+            const TARGET_RETURN = 20;
+            const trackWidth = track.clientWidth || 300; // Fallback width
+
+            // Add Finish Line Visual
+            track.innerHTML += `<div class="finish-line"></div><div class="finish-label">Target</div>`;
+
+            leaders.slice(0, 4).forEach((bot, index) => {
+                // Determine Left Position %
+                // Map return -5% to 20% -> 0% to 90% (keep room for icon)
+                let pct = (bot.return / TARGET_RETURN) * 85;
+                if (pct < 0) pct = 0;
+                if (pct > 90) pct = 90;
+
+                const botEl = document.createElement('div');
+                botEl.className = 'bot-racer';
+                botEl.style.left = pct + '%';
+
+                let iconContent = index + 1; // Rank
+                let borderColor = 'var(--text-muted)';
+                let zIndex = 10 - index;
+
+                if (index === 0) { borderColor = 'var(--accent-green)'; iconContent = '🥇'; }
+                if (index === 1) { borderColor = 'var(--accent-gold)'; iconContent = '🥈'; }
+                if (index === 2) { borderColor = '#f97316'; iconContent = '🥉'; }
+
+                botEl.innerHTML = `
+                    <div class="racer-icon" style="border-color:${borderColor}; z-index:${zIndex};">${iconContent}</div>
+                    <div class="racer-name">${bot.name}</div>
                 `;
-            }).join('');
+                track.appendChild(botEl);
+            });
         }
 
-        function renderFeed(trades) {
-            const container = document.getElementById('trade-feed');
-
-            if (trades.length > 0) {
-                const latest = trades[trades.length - 1];
-                const manualHash = JSON.stringify(latest);
-
-                if (manualHash !== lastTradeHash) {
-                    lastTradeHash = manualHash;
-                    handleNewTrade(latest);
-                }
-            }
-
-            container.innerHTML = trades.slice().reverse().slice(0, 10).map(trade => `
-                <div class="trx-item ${trade.action === 'BUY' ? 'buy' : 'sell'}">
-                    <div class="trx-time">${new Date().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' })}</div>
-                    <div class="trx-details">
-                        <span class="strategy-tag">${trade.strategy}</span>
-                        <span class="action-text">${trade.action === 'BUY' ? 'شراء' : 'بيع'}</span>
-                        <span class="symbol-text">${trade.symbol}</span>
-                    </div>
-                    <div class="trx-price">${trade.price.toFixed(2)}</div>
-                </div>
-            `).join('');
-        }
-
-        function handleNewTrade(trade) {
-            if (audioEnabled) {
-                const audio = document.getElementById('alert-sound');
-                audio.volume = 0.2;
-                audio.play().catch(e => { });
-
-                const action = trade.action === 'BUY' ? 'شراء' : 'بيع';
-                const text = `صندوق ${trade.strategy} ينفذ صفقة ${action} على ${trade.symbol} بسعر ${trade.price}`;
-                speak(text, "news_anchor");
-            }
-
-            const feed = document.querySelector('.feed-wrapper');
-            feed.classList.add('pulse-highlight');
-            setTimeout(() => feed.classList.remove('pulse-highlight'), 1000);
-        }
-
-        function speak(text, persona) {
-            if (!('speechSynthesis' in window)) return;
-            window.speechSynthesis.cancel();
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = 'ar-SA';
-            utterance.rate = 0.9;
-            utterance.pitch = 0.8;
-            window.speechSynthesis.speak(utterance);
-        }
-
-        new QRCode(document.getElementById("qrcode"), {
-            text: window.location.origin + "/app",
-            width: 80,
-            height: 80,
-            colorDark: "#000000",
-            colorLight: "#ffffff",
-            correctLevel: QRCode.CorrectLevel.H
-        });
-
-        // Initialize
-        fetchLiveData(); // Initial fetch
-        setInterval(fetchLiveData, 2000);
+        // Init
+        setInterval(fetchData, 2000);
+        fetchData();
 
     </script>
 </body>

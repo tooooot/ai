@@ -1,0 +1,197 @@
+/* --- LAYOUT 8 SPECIFIC STYLES (MIGRATED) --- */
+
+/* RACE TRACK COMPONENTS */
+.race-track-container {
+    margin: 10px 0;
+    background: rgba(255, 255, 255, 0.02);
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.race-header {
+    font-size: 0.65rem;
+    color: #94a3b8;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.race-lines {
+    position: relative;
+    height: 30px;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+    margin-top: 10px;
+}
+
+.bot-racer {
+    position: absolute;
+    bottom: -5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: left 1s ease-in-out;
+}
+
+.racer-icon {
+    width: 20px;
+    height: 20px;
+    background: #1e293b;
+    border: 2px solid var(--accent-gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.5rem;
+    color: white;
+    z-index: 2;
+}
+
+.racer-name {
+    font-size: 0.5rem;
+    color: #64748b;
+    margin-top: 2px;
+    white-space: nowrap;
+}
+
+.finish-line {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 2px;
+    background: rgba(34, 197, 94, 0.5);
+    z-index: 1;
+}
+
+.finish-label {
+    position: absolute;
+    right: -5px;
+    top: -15px;
+    font-size: 0.5rem;
+    color: var(--accent-green);
+}
+
+/* DUAL LEADERBOARD */
+.leaderboard-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    margin: 5px 0;
+}
+
+.leader-card {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 5px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.leader-title {
+    font-size: 0.6rem;
+    color: #94a3b8;
+    margin-bottom: 2px;
+}
+
+.leader-val {
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.leader-name {
+    font-size: 0.7rem;
+    color: var(--accent-gold);
+    white-space: nowrap;
+}
+
+/* ROSTER TICKER BOOSTED */
+.roster-ticker {
+    background: #1e293b;
+    border-right: 4px solid var(--accent-gold);
+    color: white;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 5px 10px;
+    margin: 5px 0;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+}
+
+.roster-label {
+    font-weight: bold;
+    color: var(--accent-gold);
+    margin-left: 10px;
+    font-size: 0.8rem;
+    z-index: 2;
+    background: #1e293b;
+    padding-left: 5px;
+}
+
+.roster-content {
+    display: inline-block;
+    padding-left: 100%;
+    animation: scroll-slow 12s linear infinite;
+}
+
+@keyframes scroll-slow {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(-100%, 0);
+    }
+}
+
+.roster-item {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+.roster-up {
+    color: var(--accent-green);
+    font-weight: bold;
+}
+
+.roster-down {
+    color: var(--accent-red);
+    font-weight: bold;
+}
+
+/* MAXIMIZED HEADLINE */
+.headline-main {
+    font-size: 1.1rem;
+    color: var(--accent-gold);
+    font-weight: 900;
+    text-align: center;
+    padding: 5px 2px;
+    margin-bottom: 2px;
+    line-height: 1.3;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+    border-bottom: 1px solid rgba(251, 191, 36, 0.2);
+}
+
+.sub-ticker {
+    background: rgba(251, 191, 36, 0.1);
+    color: #cbd5e1;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 2px 0;
+    margin-bottom: 5px;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.sub-ticker span {
+    display: inline-block;
+    padding-left: 100%;
+    animation: scroll 12s linear infinite;
+}

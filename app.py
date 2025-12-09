@@ -12,6 +12,10 @@ import random
 app = Flask(__name__)
 app.config.from_object(Config)
 
+@app.route('/design_gallery')
+def design_gallery():
+    return render_template('design_gallery.html')
+
 # --- Services Initialization ---
 market_service = MarketDataService()
 news_service = NewsEngine()
@@ -160,16 +164,22 @@ def api_verify_data():
     """
     Returns metadata for verification page.
     """
+    # Default to "Meqdam" for the main verified view if no param
+    from flask import request
+    strategy = request.args.get('strategy', 'مقدام')
+    
+    audit_data = portfolio_manager.get_audit_report(strategy)
+    
+    if not audit_data:
+        # Fallback
+        return jsonify({"error": "Strategy not found"}), 404
+        
     return jsonify({
         "server_time": time.strftime("%Y-%m-%d %H:%M:%S"),
-        "market_status": "Open (Simulated)", # In real app, check time
+        "market_status": "Open (Simulated)", 
         "connection_status": "Healthy",
-        "data_source": "yfinance + Tadawul (Verification Links Available)",
-        "sample_price": {
-            "symbol": "2010 (SABIC)",
-            "price": market_service.get_current_price("2010"),
-            "source_link": "https://www.saudiexchange.sa/wps/portal/tadawul/market-participants/issuers/issuers-directory/company-details/!ut/p/z1/04_Sj9CPykssy0xPLMnMz0vMAfIjo8zi_Tx8nU38LUz83D1CzQ0cQ4NMzHyDnQwMzMz1w1EV-HuEGAEVuPq4Ghl4GXiZGxp4Ghim60fipR8F14_Cqx-P_iQjP_dY_aC8siE3NzSi3FHRUVAQAF0N_eU!/?companySymbol=2010"
-        }
+        "data_source": "yfinance + Tadawul (Live Connection)",
+        "audit": audit_data
     })
 
 @app.route('/api/chat', methods=['POST'])

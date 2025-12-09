@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>معرض تصاميم البث (8 Full Layouts)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-nav: #0f172a;
+            --accent-gold: #fbbf24;
+            --accent-green: #22c55e;
+            --accent-red: #ef4444;
+            --text-white: #f8fafc;
+        }
+
+        body {
+            background: #020617;
+            color: white;
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin-bottom: 40px;
+            color: var(--accent-gold);
+            text-align: center;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 50px;
+            width: 100%;
+            max-width: 1600px;
+        }
+
+        .phone-container {
+            position: relative;
+            width: 320px;
+            height: 650px;
+            border: 14px solid #1e293b;
+            border-radius: 45px;
+            overflow: hidden;
+            background: var(--bg-nav);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s;
+        }
+
+        .phone-container:hover {
+            transform: scale(1.02);
+            border-color: var(--accent-gold);
+        }
+
+        .design-label {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 1.1rem;
+            color: #94a3b8;
+        }
+
+        /* --- SHARED COMPONENTS --- */
+        .screen {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-nav);
+            padding: 5px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* UPDATED: MAXIMIZED HEADLINE */
+        .headline-main {
+            font-size: 1.1rem;
+            /* Significantly larger */
+            color: var(--accent-gold);
+            /* Gold for maximum attraction */
+            font-weight: 900;
+            text-align: center;
+            padding: 5px 2px;
+            margin-bottom: 2px;
+            line-height: 1.3;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+            border-bottom: 1px solid rgba(251, 191, 36, 0.2);
+        }
+
+        .sub-ticker {
+            background: rgba(251, 191, 36, 0.1);
+            color: #cbd5e1;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            overflow: hidden;
+            padding: 2px 0;
+            margin-bottom: 5px;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+        .sub-ticker span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: scroll 12s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(-100%, 0);
+            }
+        }
+
+
+        .fomo-badge {
+            background: rgba(34, 197, 94, 0.2);
+            color: var(--accent-green);
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid var(--accent-green);
+            font-size: 0.7rem;
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        .timer-badge {
+            background: rgba(255, 255, 255, 0.1);
+            color: #cbd5e1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            display: inline-block;
+        }
+
+        .live-badge {
+            background: var(--accent-red);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.7rem;
+            color: white;
+            margin-left: 5px;
+        }
+
+        /* DUAL LEADERBOARD */
+        .leaderboard-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 5px;
+            margin: 5px 0;
+        }
+
+        .leader-card {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 5px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .leader-title {
+            font-size: 0.6rem;
+            color: #94a3b8;
+            margin-bottom: 2px;
+        }
+
+        .leader-val {
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        .leader-name {
+            font-size: 0.7rem;
+            color: var(--accent-gold);
+            white-space: nowrap;
+        }
+
+        /* ROSTER TICKER BOOSTED */
+        .roster-ticker {
+            background: #1e293b;
+            border-right: 4px solid var(--accent-gold);
+            color: white;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            overflow: hidden;
+            padding: 5px 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+        }
+
+        .roster-label {
+            font-weight: bold;
+            color: var(--accent-gold);
+            margin-left: 10px;
+            font-size: 0.8rem;
+            z-index: 2;
+            background: #1e293b;
+            padding-left: 5px;
+        }
+
+        .roster-content {
+            display: inline-block;
+            padding-left: 100%;
+            animation: scroll-slow 12s linear infinite;
+        }
+
+        @keyframes scroll-slow {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(-100%, 0);
+            }
+        }
+
+        .roster-item {
+            display: inline-block;
+            margin: 0 15px;
+        }
+
+        .roster-up {
+            color: var(--accent-green);
+            font-weight: bold;
+        }
+
+        .roster-down {
+            color: var(--accent-red);
+            font-weight: bold;
+        }
+
+        /* UPDATED: LABELED HERO STATS */
+        .spotlight-area {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-circle {
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            border: 2px solid var(--accent-gold);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.2);
+            background: rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-val {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: white;
+            line-height: 1;
+        }
+
+        .hero-label {
+            font-size: 0.6rem;
+            color: #94a3b8;
+            margin-top: -5px;
+            margin-bottom: 5px;
+        }
+
+        .hero-stats-row {
+            display: flex;
+            gap: 8px;
+            font-size: 0.7rem;
+            margin-top: 5px;
+            color: #cbd5e1;
+        }
+
+        .stat-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.1;
+        }
+
+        .stat-label {
+            font-size: 0.5rem;
+            color: #64748b;
+        }
+
+        .stat-val {
+            font-weight: bold;
+            color: white;
+        }
+
+        .status-pill {
+            position: absolute;
+            bottom: -10px;
+            background: var(--accent-green);
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-size: 0.6rem;
+        }
+
+        .events-log {
+            height: 70px;
+            overflow: hidden;
+            font-size: 0.7rem;
+            margin-top: auto;
+            position: relative;
+            z-index: 2;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 5px;
+        }
+
+        .log-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 3px 0;
+            color: #cbd5e1;
+        }
+
+        /* --- VISUAL OVERLAYS (NO QR) --- */
+        .floating-reaction {
+            position: absolute;
+            bottom: 80px;
+            right: 10px;
+            font-size: 1.5rem;
+            opacity: 0.6;
+            z-index: 10;
+        }
+
+        /* QR REMOVED */
+        .action-card {
+            position: absolute;
+            bottom: 180px;
+            left: 10px;
+            background: rgba(51, 65, 85, 0.9);
+            padding: 6px 10px;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-gold);
+            font-size: 0.7rem;
+            z-index: 15;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            max-width: 120px;
+        }
+
+
+
+        /* RACE TRACK COMPONENTS */
+        .race-track-container {
+            margin: 10px 0;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .race-header {
+            font-size: 0.65rem;
+            color: #94a3b8;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .race-lines {
+            position: relative;
+            height: 30px;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+            margin-top: 10px;
+        }
+
+        .bot-racer {
+            position: absolute;
+            bottom: -5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: left 1s ease-in-out;
+        }
+
+        .racer-icon {
+            width: 20px;
+            height: 20px;
+            background: #1e293b;
+            border: 2px solid var(--accent-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.5rem;
+            color: white;
+            z-index: 2;
+        }
+
+        .racer-name {
+            font-size: 0.5rem;
+            color: #64748b;
+            margin-top: 2px;
+            white-space: nowrap;
+        }
+
+        .finish-line {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            height: 100%;
+            width: 2px;
+            background: rgba(34, 197, 94, 0.5);
+            z-index: 1;
+        }
+
+        .finish-label {
+            position: absolute;
+            right: -5px;
+            top: -15px;
+            font-size: 0.5rem;
+            color: var(--accent-green);
+        }
+
+        /* --- LAYOUT 1: STANDARD --- */
+        .l1 .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+        }
+
+        /* --- LAYOUT 2: SPLIT --- */
+        .l2 {
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .l2 .top-half {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+        }
+
+        /* --- LAYOUT 3: VISUALS TOP --- */
+        .l3 {
+            flex-direction: column;
+        }
+
+        .l3 .visual-zone {
+            flex: 1.2;
+            position: relative;
+            border-bottom: 2px solid var(--accent-gold);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .l3 .sub-ticker {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            margin: 0;
+        }
+
+        /* --- LAYOUT 4: GRID --- */
+        .l4 .grid-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .l4 .card {
+            background: var(--glass);
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        /* --- LAYOUT 5: HEADER HERO --- */
+        .l5 .header-massive {
+            background: #1e293b;
+            padding: 20px 10px 40px 10px;
+            border-radius: 0 0 30px 30px;
+            margin: -10px -10px 10px -10px;
+            text-align: center;
+            position: relative;
+        }
+
+        .l5 .headline-main {
+            font-size: 1.3rem;
+            /* Even larger for Hero layout */
+        }
+
+        /* --- LAYOUT 6: STACK --- */
+        .l6 .cards-scroll {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+
+        /* --- LAYOUT 7: TIMELINE --- */
+        .l7 {
+            flex-direction: row-reverse;
+        }
+
+        .l7 .bar {
+            width: 50px;
+            background: #1e293b;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 50px;
+        }
+
+        /* --- LAYOUT 8: DATA --- */
+        .l8 .header-row {
+            margin-bottom: 5px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #334155;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>معرض الهيكلة (ROBOT Prefix)</h1>
+
+    <div class="gallery-grid">
+
+        <!-- 1. STANDARD -->
+        <div>
+            <div class="phone-container">
+                <div class="screen l1">
+                    <div class="headline-main">شاهد الذكاء الاصطناعي يتداول في السوق السعودي 🇸🇦</div>
+                    <div class="sub-ticker"><span>نظام نسخ صفقات آلي - سجل الآن مجاناً 👆 الرابط في البايو - انضم
+                            للنخبة</span></div>
+
+                    <div class="header-row">
+                        <div class="live-badge">🔴 مباشر</div>
+                        <div class="timer-badge">⏳ أسبوع التحدي: 01:22</div>
+                    </div>
+                    <div style="text-align:center">
+                        <div class="fomo-badge">💰 إجمالي الربح المقتنص: 1,250 ريال</div>
+                    </div>
+
+                    <div class="spotlight-area">
+                        <div class="hero-circle">
+                            <div style="color:var(--accent-gold); font-size:1rem; margin-bottom:5px;">ريبوت صياد</div>
+                            <div class="hero-val">13%</div>
+                            <div class="hero-label">العائد اليومي</div>
+
+                            <div class="hero-stats-row">
+                                <div class="stat-group">
+                                    <span class="stat-val">92%</span>
+                                    <span class="stat-label">دقة الصفقات</span>
+                                </div>
+                                <div style="width:1px; background:#334155;"></div>
+                                <div class="stat-group">
+                                    <span class="stat-val">4.2k</span>
+                                    <span class="stat-label">صافي الربح</span>
+                                </div>
+                            </div>
+
+                            <div class="status-pill">رابح</div>
+                        </div>
+                    </div>
+
+                    <div class="action-card">🤖 توصية:<br>شراء قوي</div>
+
+                    <div class="leaderboard-container">
+                        <div class="leader-card">
+                            <div class="leader-title">👑 الأكثر ربحاً</div>
+                            <div class="leader-name">ريبوت مقدام</div>
+                            <div class="leader-val" style="color:var(--accent-green)">+15%</div>
+                        </div>
+                        <div class="leader-card">
+                            <div class="leader-title">🎯 أدق صفقات</div>
+                            <div class="leader-name">ريبوت قناص</div>
+                            <div class="leader-val" style="color:var(--accent-gold)">95%</div>
+                        </div>
+                    </div>
+
+                    <div class="roster-ticker">
+                        <span class="roster-label">بقية السوق:</span>
+                        <span class="roster-content">
+                            <span class="roster-item">#3 ريبوت محارب <b class="roster-up">+8%</b></span>
+                            <span class="roster-item">#4 ريبوت كاسر <b class="roster-up">+6%</b></span>
+                            <span class="roster-item">#5 ريبوت مغامر <b class="roster-down">-2%</b></span>
+                        </span>
+                    </div>
+
+                    <div class="events-log">
+                        <div class="log-item"><span>شراء أرامكو</span> <span
+                                style="color:var(--accent-green)">+2.5%</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="design-label">1. القياسي (Standard Central)</div>
+        </div>
+
+        <!-- 2. SPLIT SCREEN -->
+        <div>
+            <div class="phone-container">
+                <div class="screen l2">
+                    <div class="headline-main">شاهد الذكاء الاصطناعي يتداول في السوق السعودي 🇸🇦</div>
+                    <div class="sub-ticker"><span>نظام يعمل 24/7 لاقتناص فرص السوق - الرابط في البايو</span></div>
+
+                    <div class="top-half">
+                        <div class="hero-circle">
+                            <div style="color:var(--accent-gold); font-size:1rem; margin-bottom:5px;">ريبوت صياد</div>
+                            <div class="hero-val">13%</div>
+                            <div class="hero-label">العائد اليومي</div>
+                            <div class="hero-stats-row">
+                                <div class="stat-group"><span class="stat-val">92%</span><span
+                                        class="stat-label">دقة</span></div>
+                                <div class="stat-group"><span class="stat-val">4.2k</span><span
+                                        class="stat-label">ربح</span></div>
+                            </div>
+                            <div class="status-pill">رابح</div>
+                        </div>
+                    </div>
+                    <div class="bottom-half" style="padding:5px;">
+                        <div style="display:flex; justify-content:space-between;">
+                            <span class="fomo-badge">مقتنصة: 1,250</span>
+                            <span class="timer-badge">⏳ 01:22</span>
+                        </div>
+                        <div class="action-card" style="position:static; margin:5px 0;">🗳️ تصويت: 70% شراء</div>
+
+                        <div class="leaderboard-container">
+                            <div class="leader-card">
+                                <div class="leader-title">👑 الأكثر ربحاً</div>
+                                <div class="leader-name">ريبوت مقدام</div>
+                                <div class="leader-val" style="color:var(--accent-green)">+15%</div>
+                            </div>
+                            <div class="leader-card">
+                                <div class="leader-title">🎯 أدق صفقات</div>
+                                <div class="leader-name">ريبوت قناص</div>
+                                <div class="leader-val" style="color:var(--accent-gold)">95%</div>
+                            </div>
+                        </div>
+
+                        <div class="roster-ticker">
+                            <span class="roster-label">بقية المتسابقين:</span>
+                            <span class="roster-content">
+                                <span class="roster-item">#3 ريبوت محارب <b class="roster-up">+8%</b></span>
+                                <span class="roster-item">#4 ريبوت كاسر <b class="roster-up">+6%</b></span>
+                            </span>
+                        </div>
+
+                        <div class="events-log">
+                            <div class="log-item">شراء سابك</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="design-label">2. الشاشة المنقسمة (Split Screen)</div>
+        </div>
+
+        <!-- 3. VISUALS TOP -->
+        <div>
+            <div class="phone-container">
+                <div class="screen l3">
+                    <div class="visual-zone">
+                        <div class="headline-main" style="position:absolute; top:20px; width:100%; font-size:0.9rem;">
+                            شاهد الذكاء الاصطناعي يتداول في السوق السعودي</div>
+                        <div class="sub-ticker"><span>انسخ نجاح الروبوتات الآن عبر الرابط في البايو 👆</span></div>
+                        <div class="hero-circle">
+                            <div class="hero-val">13%</div>
+                            <div class="hero-label">العائد</div>
+                            <div class="hero-stats-row"><span class="stat-val">92% دقة</span></div>
+                        </div>
+                    </div>
+                    <div style="padding:10px; flex:1; display:flex; flex-direction:column; gap:5px;">
+                        <div class="header-row">
+                            <span class="live-badge">مباشر</span>
+                            <span class="timer-badge">⏳ 01:22</span>
+                        </div>
+                        <div class="fomo-badge" style="text-align:center">💰 +1,250 ريال ربح مقتنص</div>
+
+                        <div class="leaderboard-container">
+                            <div class="leader-card">
+                                <div class="leader-title">👑 الربح</div>
+                                <div class="leader-val">+15%</div>
+                            </div>
+                            <div class="leader-card">
+                                <div class="leader-title">🎯 الدقة</div>
+                                <div class="leader-val">95%</div>
+                            </div>
+                        </div>
+
+                        <div class="roster-ticker">
+                            <span class="roster-label">السوق: </span>
+                            <span class="roster-content">
+                                <span class="roster-item">#3 ريبوت محارب <b class="roster-up">+8%</b></span>
+                                <span class="roster-item">#4 ريبوت كاسر <b class="roster-up">+6%</b></span>
+                            </span>
+                        </div>
+
+                        <div class="action-card" style="position:static; width:100%;">⚡ تنبيه فلاش</div>
+                        <div class="events-log" style="height:50px;">
+                            <div class="log-item">شراء أرامكو</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="design-label">3. التركيز البصري (Top Visuals)</div>
+        </div>
+
+        <!-- 4. GRID -->
+        <div>
+            <div class="phone-container">
+                <div class="screen l4">
+                    <div class="headline-main">شاهد الذكاء الاصطناعي يتداول في السوق السعودي</div>
+                    <div class="sub-ticker"><span>سجل الآن لتبدأ رحلتك - الرابط في البايو للتسجيل</span></div>
+
+                    <div class="grid-box">
+                        <div class="card" style="grid-column:span 2;">
+                            <span class="timer-badge" style="margin-bottom:5px;">⏳ 01:22</span>
+                            <div class="fomo-badge">فرص: 1,250 ريال</div>
+                            <div class="hero-val" style="color:var(--accent-gold); font-size:1.5rem">13.5%</div>
+                            <div class="hero-label">العائد المحقق</div>
+                            <div style="font-size:0.7rem">🎯 92% دقة | 💰 4,200 ربح</div>
+                        </div>
+                        <div class="card">
+                            <div class="leader-title">👑 الأعلى ربحاً</div>
+                            <div class="leader-name">ريبوت مقدام</div>
+                            <div style="color:var(--accent-green)">+15%</div>
+                        </div>
+                        <div class="card">
+                            <div class="leader-title">🎯 الأعلى دقة</div>
+                            <div class="leader-name">ريبوت قناص</div>
+                            <div style="color:var(--accent-gold)">95%</div>
+                        </div>
+                    </div>
+
+                    <div class="roster-ticker" style="margin-top:auto;">
+                        <span class="roster-label">بقية السوق: </span>
+                        <span class="roster-content">
+                            <span class="roster-item">#3 ريبوت محارب <b class="roster-up">+8%</b></span>
+                            <span class="roster-item">#4 ريبوت كاسر <b class="roster-up">+6%</b></span>
+                        </span>
+                    </div>
+
+                    <div class="action-card">🤖 تحليل: إيجابي</div>
+                    <div class="events-log">
+                        <div class="log-item">شراء سابك</div>
+                    </div>
+                </div>
+            </div>
+            <div class="design-label">4. الشبكة (Grid Layout)</div>
+        </div>
+
+        <!-- 5. HEADER HERO -->
+        <div>
+            <div class="phone-container">
+                <div class="screen l5">
+                    <div class="header-massive">
+                        <div class="headline-main">شاهد الذكاء الاصطناعي يتداول في السوق السعودي 🇸🇦</div>
+                        <div class="sub-ticker"><span>نظام آلي بالكامل - انضم للنخبة عبر الرابط في البايو</span></div>
+                        <div style="font-size:1.5rem; font-weight:bold; color:var(--accent-gold)">ريبوت صياد</div>
+                        <div class="hero-val">13.5%</div>
+                        <div class="hero-label">العائد اليومي</div>
+                        <div class="hero-stats-row" style="justify-content:center;">
+                            <div class="stat-group"><span class="stat-val">92%</span><span class="stat-label">دقة
+                                    الإشارات</span></div>
+                            <div style="width:10px;"></div>
+                            <div class="stat-group"><span class="stat-val">4.2k</span><span class="stat-label">الربح
+                                    المتراكم</span></div>
+                        </div>
+
+                        <div class="fomo-badge" style="margin-top:10px;">إجمالي الفرص: 1,250 ريال</div>
+                    </div>
+
+                    <div style="padding:10px;">
+                        <div class="timer-badge" style="text-align:center; display:block; margin-bottom:10px;">⏳ نهاية
+                            تحدي الأسبوع: 01:22</div>
+                        <div class="leaderboard-container">
+                            <div class="leader-card">
+                                <div class="leader-title">👑 الأكثر ربحاً</div>
+                                <div class="leader-val" style="color:var(--accent-green)">ريبوت مقدام +15%</div>
+                            </div>
+                            <div class="leader-card">
+                                <div class="leader-title">🎯 أدق صفقات</div>
+                                <div class="leader-val" style="color:var(--accent-gold)">ريبوت قناص 95%</div>
+                            </div>
+                        </div>
+
+                        <div class="roster-ticker">
+                            <span class="roster-label">🔥 البقية: </span>
+                            <span class="roster-content">
+                                <span class="roster-item">#3 ريبوت محارب <b class="roster-up">+8%</b></span>
+                                <span class="roster-item">#4 ريبوت كاسر <b class="roster-up">+6%</b></span>
+                                <span class="roster-item">#5 ريبوت مغامر <b class="roster-down">-2%</b></span>
+                            </span>
+                        </div>
+
+                        <div class="action-card" style="position:relative; bottom:auto; left:auto; margin:10px 0;">🎮
+                            وضع المعركة: نشط</div>
+                    </div>
+                </div>
+            </div>
+            <div class="design-label">5. الهيدر العملاق (Header Hero)</div>
+        </div>
+
+        <!-- 6. CARD STACK -->
+        <div>
+            <div class="phone-container">
+                <div class="screen l6">
+                    <div class="headline-main">شاهد الذكاء الاصطناعي يتداول في السوق السعودي</div>
+                    <div class="sub-ticker"><span>انسخ الصفقات - الرابط في البايو - اكسب مثل الروبوتات</span></div>
+                    <div class="header-row" style="margin-top:10px;">
+                        <span class="live-badge">Live</span>
+                        <span class="timer-badge">⏳ 01:22</span>
+                    </div>
+
+                    <div class="cards-scroll">
+                        <div
+                            style="min-width:140px; background:#1e293b; padding:10px; border-radius:10px; border:1px solid var(--accent-gold)">
+                            <div style="color:var(--accent-gold)">ريبوت صياد</div>
+                            <div style="font-size:1.5rem; font-weight:bold;">13%</div>
+                            <div class="hero-label">العائد</div>
+                            <div style="font-size:0.7rem">🎯 92% | 💰 4k</div>
+                        </div>
+                        <div style="min-width:140px; background:#1e293b; padding:10px; border-radius:10px;">
+                            <div class="leader-title">👑 الأكثر ربحاً</div>
+                            <div>🥇 ريبوت مقدام 15%</div>
+                        </div>
+                        <div style="min-width:140px; background:#1e293b; padding:10px; border-radius:10px;">
+                            <div class="leader-title">🎯 الأعلى دقة</div>
+                            <div>🥈 ريبوت قناص 95%</div>
+                        </div>
+                    </div>
+
+                    <div class="roster-ticker" style="margin-top:auto;">
+                        <span class="roster-label">تابع: </span>
+                        <span class="roster-content">
+                            <span class="roster-item">#3 ريبوت محارب <b class="roster-up">+8%</b></span>
+                            <span class="roster-item">#4 ريبوت كاسر <b class="roster-up">+6%</b></span>
+                            <span class="roster-item">#5 ريبوت مغامر <b class="roster-down">-2%</b></span>
+                        </span>
+                    </div>
+
+                    <div class="action-card">🤖 توصية: شراء</div>
+                    <div class="events-log">
+                        <div class="log-item">شراء أرامكو</div>
+                    </div>
+                </div>
+            </div>
+            <div class="design-label">6. البطاقات (Card Stack)</div>
+        </div>
+
+        <!-- 7. TIMELINE RIGHT -->
+        <div>
+            <div class="phone-container">
+                <div class="screen l7">
+                    <div class="bar">
+                        <div style="margin-top:20px;">⏱</div>
+                    </div>
+                    <div
+                        style="flex:1; padding-right:10px; display:flex; flex-direction:column; justify-content:center;">
+                        <div class="headline-main" style="font-size:0.7rem;">شاهد الذكاء الاصطناعي يتداول في السوق
+                            السعودي</div>
+                        <div class="sub-ticker"><span>سجل الآن وابدأ في الربح - الرابط في البايو للتسجيل</span></div>
+                        <div class="header-row">
+                            <div class="timer-badge">⏳ 01:22</div>
+                        </div>
+                        <div class="hero-circle" style="width:120px; height:120px; margin:auto;">
+                            <div class="hero-val">13%</div>
+                            <div class="hero-label">العائد</div>
+                            <div style="font-size:0.6rem">🎯 92% دقة</div>
+                            <div class="status-pill">ريبوت صياد</div>
+                        </div>
+                        <div class="fomo-badge" style="text-align:center; margin-top:10px;">💰 1,250 ريال ربح</div>
+
+                        <div class="leaderboard-container">
+                            <div class="leader-card">
+                                <div class="leader-title">👑 الربح</div>
+                                <div class="leader-val">15%</div>
+                            </div>
+                            <div class="leader-card">
+                                <div class="leader-title">🎯 الدقة</div>
+                                <div class="leader-val">95%</div>
+                            </div>
+                        </div>
+
+                        <div class="roster-ticker">
+                            <span class="roster-label">آخرون: </span>
+                            <span class="roster-content">
+                                <span class="roster-item">#3 ريبوت محارب <b class="roster-up">+8%</b></span>
+                                <span class="roster-item">#4 ريبوت كاسر <b class="roster-up">+6%</b></span>
+                            </span>
+                        </div>
+
+                        <div class="action-card" style="position:static; width:100%; margin-top:10px;">📢 تنبيه عام
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="design-label">7. القائمة الجانبية (Right Sidebar)</div>
+        </div>
+
+        <!-- 8. DATA DENSE -->
+        <div>
+            <div class="phone-container">
+                <div class="screen l8">
+                    <div class="headline-main">شاهد الذكاء الاصطناعي يتداول في السوق السعودي</div>
+                    <div class="sub-ticker"><span>نظام ذكي - صفقات رابحة - الرابط في البايو لانضمام فوري</span></div>
+                    <div class="header-row">
+                        <span class="live-badge">مباشر</span>
+                        <span class="timer-badge">01:22:15</span>
+                    </div>
+
+                    <div
+                        style="background:#1e293b; padding:10px; border-radius:10px; display:flex; justify-content:space-between; align-items:center;">
+                        <div>
+                            <div style="color:var(--accent-gold); font-weight:bold;">ريبوت صياد</div>
+                            <div class="hero-label">البوت النشط</div>
+                            <div style="font-size:0.7rem; color:#cbd5e1;">🎯 دقة: 92% | 💰 رصيد: 4,200</div>
+                        </div>
+                        <div style="text-align:left;">
+                            <div style="font-size:1.8rem; font-weight:bold;">13.5%</div>
+                            <div class="hero-label">العائد اليومي</div>
+                        </div>
+                    </div>
+
+                    <!-- NEW: RACE TRACK FEATURE -->
+                    <div class="race-track-container">
+                        <div class="race-header">
+                            <span>🏎️ سباق العمالقة</span>
+                            <span>الهدف: 20%</span>
+                        </div>
+                        <div class="race-lines">
+                            <!-- Bots ordered by rank -->
+                            <div class="bot-racer" style="left:85%;">
+                                <div class="racer-icon"
+                                    style="border-color:var(--accent-green); box-shadow:0 0 10px var(--accent-green);">1
+                                </div>
+                                <div class="racer-name">مقدام</div>
+                            </div>
+                            <div class="bot-racer" style="left:75%;">
+                                <div class="racer-icon" style="border-color:var(--accent-gold);">2</div>
+                                <div class="racer-name" style="color:white;">صياد</div>
+                            </div>
+                            <div class="bot-racer" style="left:60%;">
+                                <div class="racer-icon">3</div>
+                                <div class="racer-name">قناص</div>
+                            </div>
+                            <div class="bot-racer" style="left:40%;">
+                                <div class="racer-icon" style="width:16px; height:16px; border:1px solid #64748b;">4
+                                </div>
+                            </div>
+
+                            <div class="finish-line"></div>
+                            <div class="finish-label">Target</div>
+                        </div>
+                    </div>
+
+                    <div class="leaderboard-container">
+                        <div class="leader-card">
+                            <div class="leader-title">👑 الأكثر ربحاً</div>
+                            <div class="leader-val">ريبوت مقدام +15%</div>
+                        </div>
+                        <div class="leader-card">
+                            <div class="leader-title">🎯 الأدق صفقة</div>
+                            <div class="leader-val">ريبوت قناص 95%</div>
+                        </div>
+                    </div>
+
+                    <div class="roster-ticker">
+                        <span class="roster-label">بقية السوق: </span>
+                        <span class="roster-content">
+                            <span class="roster-item">#3 ريبوت محارب <b class="roster-up">+8%</b></span>
+                            <span class="roster-item">#4 ريبوت كاسر <b class="roster-up">+6%</b></span>
+                            <span class="roster-item">#5 ريبوت مغامر <b class="roster-down">-2%</b></span>
+                        </span>
+                    </div>
+
+                    <div class="events-log" style="height:100px;">
+                        <div class="log-item">> شراء أرامكو 32.50 ريال</div>
+                        <div class="log-item">> تم إغلاق صفقة الراجحي (+2.1%)</div>
+                        <div class="log-item">> تحليل: اختراق مقاومة 12,000</div>
+                    </div>
+                </div>
+            </div>
+            <div class="design-label">8. البيانات (Data Dense Arabic + Race Track)</div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
