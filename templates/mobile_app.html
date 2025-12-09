@@ -317,6 +317,35 @@
         let explainMode = false;
         let selectedBotForDetail = null;
 
+        // Bot Data Database
+        const botData = {
+            'صياد': {
+                slogan: "سهمك في المرمى 🏹",
+                strategyTitle: "Momentum Breakout (اختراق الزخم)",
+                scientificDesc: "يعتمد على خوارزميات 'Relative Strength Index' مع دمج أحجام التداول (Volume Weighted Analysis) لاكتشاف الأسهم التي بدأت في الانطلاق قبل دخول الجمهور."
+            },
+            'رزين': {
+                slogan: "العقل قبل العاطفة ⚖️",
+                strategyTitle: "Value & Growth (القيمة والنمو)",
+                scientificDesc: "يستخدم تحليل القوائم المالية (P/E Ratio, EPS Growth) لتقييم السعر العادل للسهم، ويشتري فقط عندما يكون السعر السوقي أقل من القيمة الجوهرية (Intrinsic Value)."
+            },
+            'مقدام': {
+                slogan: "قلب الأسد 🦁",
+                strategyTitle: "Volatility Scalping (اقتناص التذبذب)",
+                scientificDesc: "يعمل في الأسواق المتطرفة. يستخدم 'Bollinger Bands' و 'ATR' لتحديد نقاط الانعكاس السريعة في الأسهم الأكثر تذبذباً خلال الجلسة."
+            },
+            'قناص': {
+                slogan: "طلقة واحدة تكفي 🎯",
+                strategyTitle: "Supply & Demand Zones (العرض والطلب)",
+                scientificDesc: "يراقب مناطق السيولة المؤسساتية (Smart Money Concepts). لا يتداول عشوائياً، بل يضع أوامر معلقة في مناطق 'Order Blocks' وينتظر السعر."
+            },
+            'عواطف': {
+                slogan: "مساعدك الشخصي 🤖",
+                strategyTitle: "Natural Language Processing",
+                scientificDesc: "ذكاء اصطناعي توليدي مخصص للأسواق المالية، يحلل الأخبار والبيانات للإجابة على استفساراتك بشكل فوري."
+            }
+        };
+
         // View Switching
         function switchView(viewName) {
             document.querySelectorAll('.view-section').forEach(el => {
@@ -333,11 +362,62 @@
         // --- NEW: Bot Details Logic ---
         function showBotDetails(botName, returnVal) {
             selectedBotForDetail = botName;
+            const data = botData[botName] || { slogan: '', strategyTitle: 'General Strategy', scientificDesc: '...' };
 
-            // Populate Details
+            // Populate Detials
             document.getElementById('detail-name').innerText = `ريبوت ${botName}`;
             document.getElementById('detail-avatar').innerText = botName[0];
-            document.getElementById('detail-return').innerText = `+${returnVal}%`;
+
+            // Handle return val display
+            if (returnVal > 0) {
+                document.getElementById('detail-return').innerText = `+${returnVal}%`;
+                document.getElementById('detail-return').style.color = 'var(--accent-green)';
+            } else {
+                document.getElementById('detail-return').innerText = `--`;
+                document.getElementById('detail-return').style.color = 'var(--text-muted)';
+            }
+
+            // Inject Slogan
+            const sloganContainer = document.getElementById('detail-slogan');
+            if (sloganContainer) sloganContainer.innerText = data.slogan;
+            else {
+                // If element doesn't exist yet (first run), creates it
+                const header = document.querySelector('.detail-header');
+                const slg = document.createElement('div');
+                slg.id = 'detail-slogan';
+                slg.style.color = 'var(--accent-gold)';
+                slg.style.fontStyle = 'italic';
+                slg.style.marginBottom = '10px';
+                slg.innerText = data.slogan;
+                header.insertBefore(slg, document.getElementById('detail-return'));
+            }
+
+            // Inject Scientific Strategy Box
+            const stratContainer = document.getElementById('detail-strategy-box');
+            console.log("Strat data: ", data);
+            const stratHTML = `
+                <div style="background:rgba(255,255,255,0.05); padding:15px; border-radius:12px; margin:20px; border:1px solid var(--border-color); text-align:right;">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:10px;">
+                        <i data-lucide="cpu" style="color:var(--accent-gold);"></i>
+                        <span style="font-weight:bold; color:white; font-size:0.9rem;">${data.strategyTitle}</span>
+                    </div>
+                    <p style="font-size:0.8rem; color:#ccc; line-height:1.6; margin:0;">
+                        ${data.scientificDesc}
+                    </p>
+                </div>
+            `;
+
+            if (stratContainer) {
+                stratContainer.innerHTML = stratHTML;
+            } else {
+                const newDiv = document.createElement('div');
+                newDiv.id = 'detail-strategy-box';
+                newDiv.innerHTML = stratHTML;
+                const parent = document.querySelector('#view-bot-detail');
+                // Insert after header
+                parent.insertBefore(newDiv, document.querySelector('.section-header'));
+                lucide.createIcons();
+            }
 
             // Mock Proof List
             const list = document.getElementById('proof-list');
