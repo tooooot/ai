@@ -17,7 +17,6 @@
     <div class="app-container">
 
         <!-- ================== VIEW 1: ONBOARDING ================== -->
-        <!-- User lands here if not subscribed -->
         <div id="view-onboarding" class="view-section active">
             <div class="onboarding-slide">
                 <div class="slide-icon">🧠 🆚 🤖</div>
@@ -58,7 +57,6 @@
         </div>
 
         <!-- ================== VIEW 2: MARKETPLACE ================== -->
-        <!-- User chooses a bot -->
         <div id="view-marketplace" class="view-section">
             <header class="app-header" style="background:transparent;">
                 <h2 style="color:white; margin:0;">اختر عقلك الذكي</h2>
@@ -84,21 +82,8 @@
                     <p style="font-size:0.8rem; color:#ccc; margin-bottom:15px;">
                         متخصص في اقتناص الفرص السريعة في السوق السعودي. يعتمد على التحليل الفني اللحظي.
                     </p>
-                    <div class="bot-stats-row">
-                        <div style="text-align:center;">
-                            <div style="font-size:0.9rem;">92%</div>
-                            <div style="font-size:0.6rem; color:#888;">دقة</div>
-                        </div>
-                        <div style="text-align:center;">
-                            <div style="font-size:0.9rem;">Medium</div>
-                            <div style="font-size:0.6rem; color:#888;">مخاطرة</div>
-                        </div>
-                        <div style="text-align:center;">
-                            <div style="font-size:0.9rem;">24/7</div>
-                            <div style="font-size:0.6rem; color:#888;">عمل</div>
-                        </div>
-                    </div>
-                    <button class="subscribe-btn" onclick="subscribe('صياد')">اشتراك (ابدأ الرحلة)</button>
+                    <button class="subscribe-btn" onclick="showBotDetails('صياد', 13)">تحليل الأداء (للمقتنعين فقط)
+                        📊</button>
                 </div>
 
                 <!-- Bot 2: Meqdam -->
@@ -120,16 +105,79 @@
                         جسور، لا يخشى التقلبات. يدخل في صفقات ذات عوائد عالية ومخاطرة مدروسة.
                     </p>
                     <button class="subscribe-btn" style="background:#334155; color:white;"
-                        onclick="subscribe('مقدام')">اشتراك</button>
+                        onclick="showBotDetails('مقدام', 22)">تحليل الأداء 📊</button>
                 </div>
             </div>
         </div>
 
+        <!-- ================== VIEW 2.5: BOT DETAILS (CONVICTION) ================== -->
+        <div id="view-bot-detail" class="view-section" style="padding-bottom:100px;">
+            <header class="app-header">
+                <button class="icon-btn" onclick="switchView('marketplace')">↩️ عودة</button>
+                <h3 style="margin:0; font-size:1rem;">تحليل الأداء</h3>
+                <div style="width:30px;"></div>
+            </header>
+
+            <div class="detail-header">
+                <div class="avatar" id="detail-avatar"
+                    style="width:60px; height:60px; font-size:1.5rem; margin:0 auto;"></div>
+                <h2 id="detail-name" style="margin:10px 0 5px;">--</h2>
+                <div class="detail-stat-big" id="detail-return">--%</div>
+                <p style="color:#888; font-size:0.8rem;">العائد التراكمي منذ بداية العام</p>
+            </div>
+
+            <div class="section-header">
+                <h3>📈 الأداء الأسبوعي (مقارنة بالسوق)</h3>
+            </div>
+            <div class="chart-container">
+                <!-- Mock Bars -->
+                <div class="chart-bar-group">
+                    <div class="chart-bar win" style="height:40%;"></div><span class="chart-label">أسبوع 1</span>
+                </div>
+                <div class="chart-bar-group">
+                    <div class="chart-bar win" style="height:60%;"></div><span class="chart-label">أسبوع 2</span>
+                </div>
+                <div class="chart-bar-group">
+                    <div class="chart-bar loss" style="height:20%;"></div><span class="chart-label">أسبوع 3</span>
+                </div>
+                <div class="chart-bar-group">
+                    <div class="chart-bar win" style="height:80%;"></div><span class="chart-label">أسبوع 4</span>
+                </div>
+                <div class="chart-bar-group">
+                    <div class="chart-bar win" style="height:90%;"></div><span class="chart-label">الحالي</span>
+                </div>
+            </div>
+
+            <div class="section-header">
+                <h3>🧠 كيف أفكر؟ (المصادر)</h3>
+            </div>
+            <div class="source-grid">
+                <div class="source-item"><i data-lucide="newspaper"></i><br>أخبار السوق</div>
+                <div class="source-item"><i data-lucide="bar-chart-2"></i><br>التحليل الفني</div>
+                <div class="source-item"><i data-lucide="globe"></i><br>الأسواق العالمية</div>
+                <div class="source-item"><i data-lucide="users"></i><br>حركة الملاك</div>
+                <div class="source-item"><i data-lucide="zap"></i><br>السيولة اللحظية</div>
+                <div class="source-item"><i data-lucide="shield"></i><br>إدارة المخاطر</div>
+            </div>
+
+            <div class="section-header">
+                <h3>📜 سجل قرارات الأسبوع الماضي</h3>
+            </div>
+            <div class="proof-section" id="proof-list">
+                <!-- Injected via JS -->
+            </div>
+
+            <div class="sticky-action">
+                <button class="bank-btn" style="width:100%; box-shadow:0 0 20px rgba(251, 191, 36, 0.4);"
+                    onclick="confirmSubscribe()">
+                    اقتنعت ✅ (اربط المحفظة)
+                </button>
+            </div>
+        </div>
+
         <!-- ================== VIEW 3: DASHBOARD ================== -->
-        <!-- Post-Subscription View -->
         <div id="view-dashboard" class="view-section">
 
-            <!-- Insight Bubble Container -->
             <div id="insight-container"></div>
 
             <header class="app-header">
@@ -141,7 +189,6 @@
                     </div>
                 </div>
                 <div style="display:flex; gap:10px;">
-                    <!-- Explain Toggle -->
                     <button class="icon-btn" id="explain-toggle" onclick="toggleExplain()"
                         style="color:var(--text-muted);">
                         <i data-lucide="lightbulb"></i>
@@ -166,11 +213,9 @@
 
             <div class="feed-wrapper" style="margin: 0 20px 80px; height:auto; min-height:400px; padding-bottom:100px;">
                 <div class="transactions-list" id="content-area">
-                    <!-- Trades injected here -->
                 </div>
             </div>
 
-            <!-- Floating Action Button -->
             <button class="fab-chat" onclick="openChat()">
                 <i data-lucide="mic"></i>
                 <span>اسأل الروبوت</span>
@@ -179,7 +224,7 @@
 
     </div>
 
-    <!-- Chat Overlay (Same as before) -->
+    <!-- Chat Overlay -->
     <div id="chat-modal"
         style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; flex-direction:column; justify-content:flex-end;">
         <div
@@ -204,8 +249,9 @@
         lucide.createIcons();
         let currentBot = null;
         let explainMode = false;
+        let selectedBotForDetail = null;
 
-        // View Switching Logic
+        // View Switching
         function switchView(viewName) {
             document.querySelectorAll('.view-section').forEach(el => {
                 el.classList.remove('active');
@@ -213,40 +259,87 @@
                     if (!el.classList.contains('active')) el.style.display = 'none';
                 }, 500);
             });
-
             const target = document.getElementById('view-' + viewName);
             target.style.display = 'block';
             setTimeout(() => target.classList.add('active'), 50);
         }
 
-        // Subscription Logic
+        // --- NEW: Bot Details Logic ---
+        function showBotDetails(botName, returnVal) {
+            selectedBotForDetail = botName;
+
+            // Populate Details
+            document.getElementById('detail-name').innerText = `ريبوت ${botName}`;
+            document.getElementById('detail-avatar').innerText = botName[0];
+            document.getElementById('detail-return').innerText = `+${returnVal}%`;
+
+            // Mock Proof List
+            const list = document.getElementById('proof-list');
+            list.innerHTML = `
+                <div class="proof-item proof-win">
+                    <div>
+                        <div style="font-weight:bold;">شراء أرامكو (ARAMCO)</div>
+                        <div style="color:#888; font-size:0.75rem;">السبب: اختراق مقاومة قوية + أخبار إيجابية</div>
+                    </div>
+                    <div style="text-align:left;">
+                        <div style="color:var(--accent-green);">+2.5%</div>
+                        <div style="font-size:0.7rem;">الثلاثاء</div>
+                    </div>
+                </div>
+                <div class="proof-item proof-loss">
+                    <div>
+                        <div style="font-weight:bold;">وقف خسارة الراجحي</div>
+                        <div style="color:#888; font-size:0.75rem;">السبب: هبوط فجائي للسوق</div>
+                    </div>
+                    <div style="text-align:left;">
+                        <div style="color:var(--accent-red);">-0.8%</div>
+                        <div style="font-size:0.7rem;">الأربعاء</div>
+                    </div>
+                </div>
+                <div class="proof-item proof-win">
+                    <div>
+                        <div style="font-weight:bold;">بيع سابق (SABIC)</div>
+                        <div style="color:#888; font-size:0.75rem;">السبب: الوصول للهدف السعري</div>
+                    </div>
+                    <div style="text-align:left;">
+                        <div style="color:var(--accent-green);">+1.2%</div>
+                        <div style="font-size:0.7rem;">الخميس</div>
+                    </div>
+                </div>
+            `;
+
+            switchView('bot-detail');
+            lucide.createIcons();
+        }
+
+        function confirmSubscribe() {
+            if (!selectedBotForDetail) return;
+            subscribe(selectedBotForDetail);
+        }
+
         function subscribe(botName) {
-            alert(`مبروك! تم ربط محفظتك مع الروبوت ${botName} 🚀`);
+            alert(`تم ربط المحفظة بنجاح مع ${botName}! 🚀`);
             currentBot = botName;
 
-            // Setup Dashboard
             document.getElementById('dash-avatar').innerText = botName[0];
             document.getElementById('dash-status').innerText = `متصل بـ ${botName}`;
             document.querySelector('.fab-chat span').innerText = `اسأل ${botName}`;
 
             switchView('dashboard');
-            loadStrategy(botName); // Load data
+            loadStrategy(botName);
 
-            // Auto-enable explanation for 10 seconds as demo
             toggleExplain();
             setTimeout(() => {
-                showInsight("مرحباً بك! سأقوم الآن بتحليل 50 شركة في السوق السعودي. سأخبرك بكل قرار أتخذه.");
+                showInsight("جاري تحليل السيولة الداخلة الآن...");
             }, 1000);
         }
 
-        // Toggle Insight Notifications
         function toggleExplain() {
             explainMode = !explainMode;
             const btn = document.getElementById('explain-toggle');
             if (explainMode) {
                 btn.style.color = 'var(--accent-gold)';
-                alert("تم تفعيل وضع الشفافية: ستصلك إشعارات بمبررات القرارات.");
-                // Start Simulation
+                // alert("تم تفعيل الشرح");
                 startSimulation();
             } else {
                 btn.style.color = 'var(--text-muted)';
@@ -264,7 +357,6 @@
             container.appendChild(bubble);
             lucide.createIcons();
 
-            // Remove after 5s
             setTimeout(() => {
                 bubble.style.opacity = '0';
                 bubble.style.top = '-100px';
@@ -274,30 +366,25 @@
 
         function startSimulation() {
             if (!explainMode) return;
-            // Fake insights every 15s
             setTimeout(() => {
-                if (explainMode) showInsight(`تحليل: لاحظت زيادة في حجم تداول قطاع الأسمنت. أراقب سهم أسمنت الجنوب.`);
+                if (explainMode) showInsight(`تحليل: لاحظت سيولة عالية في قطاع البنوك.`);
                 if (explainMode) startSimulation();
             }, 15000);
         }
 
-        // --- Previously Existing Logic (Modified) ---
         async function loadStrategy(name) {
             const container = document.getElementById('content-area');
-            container.innerHTML = '<div style="text-align:center; padding:20px; color:#aaa;"> جارِ جلب البيانات الحية...</div>';
-
+            container.innerHTML = '<div style="text-align:center; padding:20px; color:#aaa;"> جارِ جلب البيانات...</div>';
             try {
                 const res = await fetch(`/api/portfolio/${encodeURIComponent(name)}`);
                 const data = await res.json();
-
-                // Mock Balance Update
                 document.getElementById('cash-display').innerText = data.cash.toFixed(2) + " SAR";
 
                 if (data.history && data.history.length > 0) {
                     container.innerHTML = data.history.slice().reverse().map(t => {
                         return `
-                        <div class="trx-item ${t.action === 'BUY' ? 'buy' : 'sell'}" style="margin-bottom:10px; background:rgba(255,255,255,0.05); padding:10px;">
-                            <div class="trx-details" style="flex-direction:column; gap:5px;">
+                        <div class="trx-item ${t.action === 'BUY' ? 'buy' : 'sell'}">
+                            <div class="trx-details" style="flex-direction:column; gap:5px; width:100%;">
                                 <div style="display:flex; justify-content:space-between;">
                                     <span class="strategy-tag ${t.action === 'BUY' ? 'green' : 'red'}">${t.action}</span>
                                     <span class="symbol-text">${t.symbol}</span>
@@ -312,14 +399,11 @@
                     }).join('');
                     lucide.createIcons();
                 } else {
-                    container.innerHTML = '<div style="text-align:center; padding:20px; color:#666;">جاري مسح السوق... لم يتم العثور على فرص بعد.</div>';
+                    container.innerHTML = '<div style="text-align:center; padding:20px; color:#666;">لا توجد صفقات حالياً.</div>';
                 }
-            } catch (e) {
-                console.error(e);
-            }
+            } catch (e) { console.error(e); }
         }
 
-        // Chat & Voice Logic (Keep existing)
         function openChat() { document.getElementById('chat-modal').style.display = 'flex'; }
         async function sendMessage() {
             const inp = document.getElementById('chat-input');
@@ -338,10 +422,6 @@
                 hist.innerHTML += `<div style="text-align:left; margin-bottom:10px;"><span style="background:var(--accent-green); color:black; padding:8px 12px; border-radius:15px 15px 15px 0; display:inline-block;">${d.response}</span></div>`;
             } catch (e) { }
         }
-
-        // Init: Check if we should auto-load dashboard (if cookie/localstorage existed, but for now reset to onboarding)
-        // Default is View 1 (Onboarding)
-        // switchView('onboarding'); // Already active by HTML structure
     </script>
 </body>
 
