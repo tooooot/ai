@@ -10,6 +10,59 @@
         rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
+<style>
+    /* Internal Styles for Broker Modal */
+    .broker-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .broker-card:active {
+        transform: scale(0.95);
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .broker-logo {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: white;
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+    }
+
+    .loader-spinner {
+        border: 4px solid rgba(255, 255, 255, 0.1);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border-left-color: var(--accent-gold);
+        animation: spin 1s linear infinite;
+        margin: 0 auto;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
 
 <body class="bank-theme app-mode">
 
@@ -235,9 +288,46 @@
 
             <div class="sticky-action">
                 <button class="bank-btn" style="width:100%; box-shadow:0 0 20px rgba(251, 191, 36, 0.4);"
-                    onclick="confirmSubscribe()">
+                    onclick="openBrokerModal()">
                     اقتنعت ✅ (اربط المحفظة)
                 </button>
+            </div>
+        </div>
+
+        <!-- ================== MODAL: BROKER SELECTION ================== -->
+        <div id="broker-modal" class="view-section" style="background:rgba(0,0,0,0.95); z-index:9999;">
+            <header class="app-header">
+                <button class="icon-btn" onclick="closeBrokerModal()">✖️ إلغاء</button>
+                <h3 style="margin:0;">ربط المحفظة</h3>
+                <div style="width:30px;"></div>
+            </header>
+
+            <div style="padding:20px; text-align:center;">
+                <p style="color:#ccc; margin-bottom:30px;">اختر وسيطك المالي لمنح تصريح التداول</p>
+
+                <div class="broker-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
+                    <button class="broker-card" onclick="connectBroker('الراجحي المالية', '#2563eb')">
+                        <div class="broker-logo" style="background:#2563eb;">AR</div>
+                        <span>الراجحي المالية</span>
+                    </button>
+                    <button class="broker-card" onclick="connectBroker('الأهلي كابيتال', '#16a34a')">
+                        <div class="broker-logo" style="background:#16a34a;">SNB</div>
+                        <span>الأهلي كابيتال</span>
+                    </button>
+                    <button class="broker-card" onclick="connectBroker('دراية المالية', '#a855f7')">
+                        <div class="broker-logo" style="background:#a855f7;">DY</div>
+                        <span>دراية المالية</span>
+                    </button>
+                    <button class="broker-card" onclick="connectBroker('الرياض المالية', '#ca8a04')">
+                        <div class="broker-logo" style="background:#ca8a04;">RI</div>
+                        <span>الرياض المالية</span>
+                    </button>
+                </div>
+
+                <div id="connection-status" style="margin-top:40px; display:none;">
+                    <div class="loader-spinner"></div>
+                    <p id="status-text" style="margin-top:20px; color:var(--accent-gold);">جاري الاتصال...</p>
+                </div>
             </div>
         </div>
 
@@ -458,9 +548,46 @@
             lucide.createIcons();
         }
 
+        // --- Broker Connection Logic ---
+        function openBrokerModal() {
+            switchView('broker-modal'); // Reusing switchView to show it as a layer
+        }
+
+        function closeBrokerModal() {
+            switchView('bot-detail');
+        }
+
+        function connectBroker(brokerName, color) {
+            const statusDiv = document.getElementById('connection-status');
+            const statusText = document.getElementById('status-text');
+            const grid = document.querySelector('.broker-grid');
+
+            grid.style.opacity = '0.3';
+            grid.style.pointerEvents = 'none';
+            statusDiv.style.display = 'block';
+
+            // Simulation Sequence
+            setTimeout(() => { statusText.innerText = "جاري المصادقة مع النفاذ الوطني..."; }, 1500);
+            setTimeout(() => { statusText.innerText = `جاري جلب المحفظة من ${brokerName}...`; }, 3500);
+            setTimeout(() => {
+                statusText.innerText = "تم الاتصال بنجاح! ✅";
+                statusText.style.color = "var(--accent-green)";
+            }, 5500);
+
+            setTimeout(() => {
+                // Reset UI
+                statusDiv.style.display = 'none';
+                grid.style.opacity = '1';
+                grid.style.pointerEvents = 'auto';
+
+                // Finalize
+                subscribe(selectedBotForDetail);
+            }, 6500);
+        }
+
         function confirmSubscribe() {
-            if (!selectedBotForDetail) return;
-            subscribe(selectedBotForDetail);
+            // Deprecated, redirected to openBrokerModal
+            openBrokerModal();
         }
 
         function subscribe(botName) {
