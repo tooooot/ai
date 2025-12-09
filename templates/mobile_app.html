@@ -9,40 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap"
         rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        /* Extra Tweaks for App Mode */
-        .strategy-scroll {
-            display: flex;
-            gap: 12px;
-            overflow-x: auto;
-            padding: 10px 20px;
-            scrollbar-width: none;
-            /* Hide scrollbar */
-        }
-
-        .strategy-scroll::-webkit-scrollbar {
-            display: none;
-        }
-
-        .st-pill {
-            background: var(--bg-card);
-            padding: 10px 20px;
-            border-radius: 12px;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
-            white-space: nowrap;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-weight: bold;
-        }
-
-        .st-pill.active {
-            background: var(--accent-gold);
-            color: #0b1120;
-            border-color: var(--accent-gold);
-            box-shadow: 0 0 10px rgba(251, 191, 36, 0.3);
-        }
-    </style>
 </head>
 
 <body class="bank-theme app-mode">
@@ -50,60 +16,170 @@
     <!-- App Container -->
     <div class="app-container">
 
-        <!-- Premium Header -->
-        <header class="app-header">
-            <div class="user-info">
-                <div class="avatar">AI</div>
-                <div>
-                    <span class="greeting">أهلاً بك</span>
-                    <span class="status">المحفظة الذكية المتصلة</span>
+        <!-- ================== VIEW 1: ONBOARDING ================== -->
+        <!-- User lands here if not subscribed -->
+        <div id="view-onboarding" class="view-section active">
+            <div class="onboarding-slide">
+                <div class="slide-icon">🧠 🆚 🤖</div>
+                <h1 class="main-title">لماذا تخسر في السوق؟</h1>
+                <p style="color:var(--text-secondary); line-height:1.6;">
+                    الإنسان يتردد، يخاف، ويتعب.<br>
+                    الأسواق لا ترحم العواطف.
+                </p>
+
+                <div class="contrast-box">
+                    <div class="vs-item vs-brain">
+                        <i data-lucide="frown" style="margin-bottom:5px;"></i><br>
+                        قرارات عاطفية
+                    </div>
+                    <div style="font-weight:bold; color:#555;">VS</div>
+                    <div class="vs-item vs-bot">
+                        <i data-lucide="cpu" style="margin-bottom:5px;"></i><br>
+                        بيانات صافية
+                    </div>
+                </div>
+
+                <div class="contrast-box">
+                    <div class="vs-item vs-brain">
+                        <i data-lucide="clock" style="margin-bottom:5px;"></i><br>
+                        نوم وراحة
+                    </div>
+                    <div style="font-weight:bold; color:#555;">VS</div>
+                    <div class="vs-item vs-bot">
+                        <i data-lucide="zap" style="margin-bottom:5px;"></i><br>
+                        24/7 اقتناص
+                    </div>
+                </div>
+
+                <button class="bank-btn" onclick="switchView('marketplace')" style="width:100%; margin-top:20px;">
+                    اكتشف الروبوتات 🚀
+                </button>
+            </div>
+        </div>
+
+        <!-- ================== VIEW 2: MARKETPLACE ================== -->
+        <!-- User chooses a bot -->
+        <div id="view-marketplace" class="view-section">
+            <header class="app-header" style="background:transparent;">
+                <h2 style="color:white; margin:0;">اختر عقلك الذكي</h2>
+                <button class="icon-btn" onclick="switchView('onboarding')">↩️</button>
+            </header>
+
+            <div class="market-grid">
+                <!-- Bot 1: Sayyad -->
+                <div class="bot-card-pro featured">
+                    <div class="bot-card-header">
+                        <div style="display:flex; align-items:center; gap:10px;">
+                            <div class="avatar" style="background:var(--accent-gold); color:black;">ص</div>
+                            <div>
+                                <div style="font-weight:bold; color:white;">ريبوت صياد</div>
+                                <div style="font-size:0.7rem; color:var(--accent-gold);">الأكثر شعبية</div>
+                            </div>
+                        </div>
+                        <div style="text-align:center;">
+                            <div style="font-weight:900; color:var(--accent-green); font-size:1.2rem;">+13%</div>
+                            <div style="font-size:0.6rem; color:#888;">عائد شهري</div>
+                        </div>
+                    </div>
+                    <p style="font-size:0.8rem; color:#ccc; margin-bottom:15px;">
+                        متخصص في اقتناص الفرص السريعة في السوق السعودي. يعتمد على التحليل الفني اللحظي.
+                    </p>
+                    <div class="bot-stats-row">
+                        <div style="text-align:center;">
+                            <div style="font-size:0.9rem;">92%</div>
+                            <div style="font-size:0.6rem; color:#888;">دقة</div>
+                        </div>
+                        <div style="text-align:center;">
+                            <div style="font-size:0.9rem;">Medium</div>
+                            <div style="font-size:0.6rem; color:#888;">مخاطرة</div>
+                        </div>
+                        <div style="text-align:center;">
+                            <div style="font-size:0.9rem;">24/7</div>
+                            <div style="font-size:0.6rem; color:#888;">عمل</div>
+                        </div>
+                    </div>
+                    <button class="subscribe-btn" onclick="subscribe('صياد')">اشتراك (ابدأ الرحلة)</button>
+                </div>
+
+                <!-- Bot 2: Meqdam -->
+                <div class="bot-card-pro">
+                    <div class="bot-card-header">
+                        <div style="display:flex; align-items:center; gap:10px;">
+                            <div class="avatar" style="background:#ef4444; color:white;">م</div>
+                            <div>
+                                <div style="font-weight:bold; color:white;">ريبوت مقدام</div>
+                                <div style="font-size:0.7rem; color:#ef4444;">عالي المخاطر</div>
+                            </div>
+                        </div>
+                        <div style="text-align:center;">
+                            <div style="font-weight:900; color:var(--accent-green); font-size:1.2rem;">+22%</div>
+                            <div style="font-size:0.6rem; color:#888;">عائد شهري</div>
+                        </div>
+                    </div>
+                    <p style="font-size:0.8rem; color:#ccc; margin-bottom:15px;">
+                        جسور، لا يخشى التقلبات. يدخل في صفقات ذات عوائد عالية ومخاطرة مدروسة.
+                    </p>
+                    <button class="subscribe-btn" style="background:#334155; color:white;"
+                        onclick="subscribe('مقدام')">اشتراك</button>
                 </div>
             </div>
-            <div style="display:flex; gap:10px;">
-                <button class="icon-btn" onclick="window.location.href='/verify'">🛡️</button>
-                <button class="icon-btn" onclick="openChat()">💬</button>
+        </div>
+
+        <!-- ================== VIEW 3: DASHBOARD ================== -->
+        <!-- Post-Subscription View -->
+        <div id="view-dashboard" class="view-section">
+
+            <!-- Insight Bubble Container -->
+            <div id="insight-container"></div>
+
+            <header class="app-header">
+                <div class="user-info">
+                    <div class="avatar" id="dash-avatar">AI</div>
+                    <div>
+                        <span class="greeting">محفظة نشطة</span>
+                        <span class="status" id="dash-status">متصل بـ --</span>
+                    </div>
+                </div>
+                <div style="display:flex; gap:10px;">
+                    <!-- Explain Toggle -->
+                    <button class="icon-btn" id="explain-toggle" onclick="toggleExplain()"
+                        style="color:var(--text-muted);">
+                        <i data-lucide="lightbulb"></i>
+                    </button>
+                    <button class="icon-btn" onclick="window.location.href='/verify'">🛡️</button>
+                </div>
+            </header>
+
+            <div class="balance-card">
+                <div class="label">صافي قيمة الأصول</div>
+                <div class="amount" id="cash-display">10,000 SAR</div>
+                <div class="change positive">
+                    <i data-lucide="activity"></i>
+                    <span>يعمل الآن في السوق...</span>
+                </div>
             </div>
-        </header>
 
-        <!-- Balance Card -->
-        <div class="balance-card">
-            <div class="label">إجمالي السيولة النقدية</div>
-            <div class="amount" id="cash-display">-- SAR</div>
-            <div class="change positive">
-                <i data-lucide="trending-up"></i>
-                <span>جاهز للاقتناص</span>
+            <div class="section-header">
+                <h3>📜 القرارات الحية</h3>
+                <span class="status" style="font-size:0.7rem;">تحديث لحظي</span>
             </div>
-        </div>
 
-        <!-- Strategy Selector -->
-        <div class="section-header">
-            <h3>🤖 اختر الاستراتيجية</h3>
-        </div>
-        <div class="strategy-scroll" id="strategy-selector">
-            <!-- Pills Injected Here -->
-        </div>
-
-        <!-- Transactions Feed -->
-        <div class="section-header" style="margin-top:20px;">
-            <h3>سجل الصفقات الحية</h3>
-            <a href="#" class="see-all">عرض الكل</a>
-        </div>
-
-        <div class="feed-wrapper" style="margin: 0 20px 80px; height:auto; min-height:300px;">
-            <div class="transactions-list" id="content-area">
-                <div style="text-align:center; padding:20px; color:#666;">جاري تحميل البيانات الذكية...</div>
+            <div class="feed-wrapper" style="margin: 0 20px 80px; height:auto; min-height:400px; padding-bottom:100px;">
+                <div class="transactions-list" id="content-area">
+                    <!-- Trades injected here -->
+                </div>
             </div>
-        </div>
 
-        <!-- Floating Action Button (Voice/Chat) -->
-        <button class="fab-chat" onclick="openChat()">
-            <i data-lucide="mic"></i>
-            <span>تحدث مع عواطف</span>
-        </button>
+            <!-- Floating Action Button -->
+            <button class="fab-chat" onclick="openChat()">
+                <i data-lucide="mic"></i>
+                <span>اسأل الروبوت</span>
+            </button>
+        </div>
 
     </div>
 
-    <!-- Chat Modal (Hidden by Default) -->
+    <!-- Chat Overlay (Same as before) -->
     <div id="chat-modal"
         style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; flex-direction:column; justify-content:flex-end;">
         <div
@@ -111,9 +187,6 @@
             <div
                 style="padding:20px; border-bottom:1px solid #333; display:flex; justify-content:space-between; align-items:center;">
                 <h3 style="margin:0; color:white;">المساعد الذكي</h3>
-                <button onclick="testVoice()"
-                    style="background:#334155; color:var(--accent-gold); border:none; padding:5px 10px; border-radius:5px; font-size:0.8rem;">🔊
-                    Test Voice</button>
                 <button onclick="document.getElementById('chat-modal').style.display='none'"
                     style="background:none; border:none; color:white; font-size:1.5rem;">&times;</button>
             </div>
@@ -129,43 +202,97 @@
 
     <script>
         lucide.createIcons();
-        const strategies = [
-            "رزين", "مقدام", "حصاد",
-            "برق", "قناص", "موج",
-            "مقتحم", "جوال", "عواطف", "محظوظ"
-        ];
-        let currentStrategy = "عواطف";
+        let currentBot = null;
+        let explainMode = false;
 
-        // Render Selector
-        function renderSelector() {
-            const container = document.getElementById('strategy-selector');
-            container.innerHTML = strategies.map(s => `
-                <div class="st-pill ${s === currentStrategy ? 'active' : ''}" onclick="loadStrategy('${s}')">
-                    ${s}
-                </div>
-            `).join('');
+        // View Switching Logic
+        function switchView(viewName) {
+            document.querySelectorAll('.view-section').forEach(el => {
+                el.classList.remove('active');
+                setTimeout(() => {
+                    if (!el.classList.contains('active')) el.style.display = 'none';
+                }, 500);
+            });
+
+            const target = document.getElementById('view-' + viewName);
+            target.style.display = 'block';
+            setTimeout(() => target.classList.add('active'), 50);
         }
 
+        // Subscription Logic
+        function subscribe(botName) {
+            alert(`مبروك! تم ربط محفظتك مع الروبوت ${botName} 🚀`);
+            currentBot = botName;
+
+            // Setup Dashboard
+            document.getElementById('dash-avatar').innerText = botName[0];
+            document.getElementById('dash-status').innerText = `متصل بـ ${botName}`;
+            document.querySelector('.fab-chat span').innerText = `اسأل ${botName}`;
+
+            switchView('dashboard');
+            loadStrategy(botName); // Load data
+
+            // Auto-enable explanation for 10 seconds as demo
+            toggleExplain();
+            setTimeout(() => {
+                showInsight("مرحباً بك! سأقوم الآن بتحليل 50 شركة في السوق السعودي. سأخبرك بكل قرار أتخذه.");
+            }, 1000);
+        }
+
+        // Toggle Insight Notifications
+        function toggleExplain() {
+            explainMode = !explainMode;
+            const btn = document.getElementById('explain-toggle');
+            if (explainMode) {
+                btn.style.color = 'var(--accent-gold)';
+                alert("تم تفعيل وضع الشفافية: ستصلك إشعارات بمبررات القرارات.");
+                // Start Simulation
+                startSimulation();
+            } else {
+                btn.style.color = 'var(--text-muted)';
+            }
+        }
+
+        function showInsight(text) {
+            const container = document.getElementById('insight-container');
+            const bubble = document.createElement('div');
+            bubble.className = 'insight-bubble';
+            bubble.innerHTML = `
+                <div style="color:var(--accent-gold);"><i data-lucide="info"></i></div>
+                <div style="font-size:0.85rem; color:white; line-height:1.4;">${text}</div>
+            `;
+            container.appendChild(bubble);
+            lucide.createIcons();
+
+            // Remove after 5s
+            setTimeout(() => {
+                bubble.style.opacity = '0';
+                bubble.style.top = '-100px';
+                setTimeout(() => bubble.remove(), 500);
+            }, 6000);
+        }
+
+        function startSimulation() {
+            if (!explainMode) return;
+            // Fake insights every 15s
+            setTimeout(() => {
+                if (explainMode) showInsight(`تحليل: لاحظت زيادة في حجم تداول قطاع الأسمنت. أراقب سهم أسمنت الجنوب.`);
+                if (explainMode) startSimulation();
+            }, 15000);
+        }
+
+        // --- Previously Existing Logic (Modified) ---
         async function loadStrategy(name) {
-            currentStrategy = name;
-            renderSelector();
-
             const container = document.getElementById('content-area');
-            container.innerHTML = '<div style="text-align:center; padding:20px; color:#aaa;"> جارِ الاتصال بقاعدة البيانات...</div>';
-
-            // UPDATE FAB BUTTON TEXT
-            const fabText = document.querySelector('.fab-chat span');
-            if (fabText) fabText.innerText = `تحدث مع ${name}`;
+            container.innerHTML = '<div style="text-align:center; padding:20px; color:#aaa;"> جارِ جلب البيانات الحية...</div>';
 
             try {
                 const res = await fetch(`/api/portfolio/${encodeURIComponent(name)}`);
                 const data = await res.json();
 
-                // Update Cash
-                const cashEl = document.getElementById('cash-display');
-                if (cashEl) cashEl.innerText = data.cash.toFixed(2) + " SAR";
+                // Mock Balance Update
+                document.getElementById('cash-display').innerText = data.cash.toFixed(2) + " SAR";
 
-                // Render Trades
                 if (data.history && data.history.length > 0) {
                     container.innerHTML = data.history.slice().reverse().map(t => {
                         return `
@@ -176,108 +303,45 @@
                                     <span class="symbol-text">${t.symbol}</span>
                                     <span class="trx-price">${t.price.toFixed(2)}</span>
                                 </div>
-                                <div style="font-size:0.85rem; color:#ccc;">${t.reason}</div>
-                                ${t.goals ? `
-                                <div style="display:flex; gap:10px; font-size:0.75rem; color:#888; margin-top:5px;">
-                                    <span>🎯 ${t.goals.target_price}</span>
-                                    <span>🛑 ${t.goals.stop_loss}</span>
-                                </div>` : ''}
+                                <div style="font-size:0.85rem; color:#ccc; display:flex; align-items:center; gap:5px;">
+                                    <i data-lucide="cpu" style="width:12px;"></i> ${t.reason}
+                                </div>
                             </div>
                         </div>
                         `;
                     }).join('');
+                    lucide.createIcons();
                 } else {
-                    container.innerHTML = '<div style="text-align:center; padding:20px; color:#666;">لا توجد صفقات مسجلة لهذه الاستراتيجية.</div>';
+                    container.innerHTML = '<div style="text-align:center; padding:20px; color:#666;">جاري مسح السوق... لم يتم العثور على فرص بعد.</div>';
                 }
-
             } catch (e) {
-                container.innerHTML = '<div style="color:red; text-align:center;">خطأ في الاتصال</div>';
+                console.error(e);
             }
         }
 
-        // --- Voice & Chat ---
+        // Chat & Voice Logic (Keep existing)
         function openChat() { document.getElementById('chat-modal').style.display = 'flex'; }
-
         async function sendMessage() {
             const inp = document.getElementById('chat-input');
             const txt = inp.value;
             if (!txt) return;
             const hist = document.getElementById('chat-history');
-
             hist.innerHTML += `<div style="text-align:right; margin-bottom:10px;"><span style="background:#334155; padding:8px 12px; border-radius:15px 15px 0 15px; display:inline-block;">${txt}</span></div>`;
             inp.value = '';
-
             try {
                 const res = await fetch('/api/chat', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ persona: currentStrategy, message: txt })
+                    body: JSON.stringify({ persona: currentBot || 'General', message: txt })
                 });
                 const d = await res.json();
                 hist.innerHTML += `<div style="text-align:left; margin-bottom:10px;"><span style="background:var(--accent-green); color:black; padding:8px 12px; border-radius:15px 15px 15px 0; display:inline-block;">${d.response}</span></div>`;
-                speak(d.response, currentStrategy);
             } catch (e) { }
         }
 
-        function testVoice() {
-            const v = speak("أهلاً بك، أنا " + currentStrategy + ". هل تسمعني بوضوح؟", currentStrategy);
-            if (v && v.name) alert("Voice: " + v.name);
-            else alert("Using Default Voice (check pitch)");
-        }
-
-        function speak(text, persona) {
-            if (!window.speechSynthesis) return;
-            window.speechSynthesis.cancel();
-            const u = new SpeechSynthesisUtterance(text);
-            u.lang = 'ar-SA';
-
-            // Get voices
-            let voices = window.speechSynthesis.getVoices();
-            // Retry if empty
-            if (voices.length === 0) {
-                window.speechSynthesis.onvoiceschanged = () => {
-                    voices = window.speechSynthesis.getVoices();
-                    // retry speak? (simplified for now)
-                };
-            }
-
-            let v = null;
-
-            // LOGIC FOR AWATIF (FEMALE)
-            if (persona && persona.includes("عواطف")) {
-                u.pitch = 1.6; // Higher pitch to force 'female-like' tone if voice missing
-                u.rate = 1.1;
-
-                // Try to find specific female voice
-                v = voices.find(vo =>
-                    vo.name.includes("Hoda") ||
-                    vo.name.includes("Laila") ||
-                    vo.name.includes("Zaira") ||
-                    vo.name.includes("Muna")
-                );
-            } else {
-                // DEFAULT MALE
-                u.pitch = 0.9;
-                u.rate = 1.0;
-            }
-
-            if (v) {
-                u.voice = v;
-                console.log("Selected Voice:", v.name);
-            } else {
-                console.log("No specific voice found, using default with pitch:", u.pitch);
-            }
-
-            window.speechSynthesis.speak(u);
-            return v;
-        }
-
-        window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
-
-        // Init
-        renderSelector();
-        loadStrategy(currentStrategy);
-
+        // Init: Check if we should auto-load dashboard (if cookie/localstorage existed, but for now reset to onboarding)
+        // Default is View 1 (Onboarding)
+        // switchView('onboarding'); // Already active by HTML structure
     </script>
 </body>
 
