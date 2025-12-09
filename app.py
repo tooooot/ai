@@ -107,7 +107,7 @@ def dashboard():
 def live_broadcast():
     return render_template('live.html')
 
-@app.route('/app')
+@app.route('/app', strict_slashes=False)
 def mobile_app_view():
     return render_template('mobile_app.html')
 
