@@ -703,3 +703,115 @@ body.app-mode {
         margin-left: -220px;
     }
 }
+
+/* --- Bot Detail View (Conviction Phase) --- */
+.detail-header {
+    text-align: center;
+    padding: 30px 20px;
+    background: linear-gradient(to bottom, var(--bg-header), var(--bg-dark));
+    border-bottom: 1px solid var(--border-color);
+}
+
+.detail-stat-big {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--accent-green);
+    margin: 10px 0;
+}
+
+.chart-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    height: 150px;
+    margin: 20px 0;
+    padding: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.chart-bar-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    width: 15%;
+}
+
+.chart-bar {
+    width: 100%;
+    background: var(--bg-highlight);
+    border-radius: 4px;
+    position: relative;
+    transition: height 1s ease-out;
+}
+
+.chart-bar.win {
+    background: var(--accent-green);
+}
+
+.chart-bar.loss {
+    background: var(--accent-red);
+}
+
+.chart-label {
+    font-size: 0.6rem;
+    color: var(--text-muted);
+}
+
+.proof-section {
+    padding: 20px;
+}
+
+.proof-item {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+}
+
+.proof-win {
+    border-right: 3px solid var(--accent-green);
+}
+
+.proof-loss {
+    border-right: 3px solid var(--accent-red);
+}
+
+.source-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 20px;
+}
+
+.source-item {
+    background: var(--bg-card);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+}
+
+.source-item i {
+    color: var(--accent-gold);
+    margin-bottom: 8px;
+}
+
+.sticky-action {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--border-color);
+    z-index: 200;
+    display: flex;
+    justify-content: center;
+}
