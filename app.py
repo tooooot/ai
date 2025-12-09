@@ -1,4 +1,5 @@
 from flask import Flask, render_template, jsonify
+print("--- FLASK APP V-DEBUG-3 STARTING ---")
 from config import Config
 from market_data import MarketDataService
 from news_engine import NewsEngine
