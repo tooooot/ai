@@ -9,6 +9,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap"
         rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0b1120">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 </head>
 <style>
     /* Internal Styles for Broker Modal */
@@ -61,6 +67,43 @@
         100% {
             transform: rotate(360deg);
         }
+    }
+
+    /* Bottom Navigation */
+    .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: rgba(15, 23, 42, 0.95);
+        backdrop-filter: blur(10px);
+        border-top: 1px solid var(--border-color);
+        display: flex;
+        justify-content: space-around;
+        padding: 10px 0 20px 0;
+        /* Extra padding for iOS home indicator */
+        z-index: 1000;
+    }
+
+    .nav-item {
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        font-size: 0.7rem;
+        cursor: pointer;
+    }
+
+    .nav-item.active {
+        color: var(--accent-gold);
+    }
+
+    .nav-item i {
+        width: 20px;
+        height: 20px;
     }
 </style>
 
