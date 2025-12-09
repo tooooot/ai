@@ -12,6 +12,15 @@ import random
 app = Flask(__name__)
 app.config.from_object(Config)
 
+@app.errorhandler(404)
+def page_not_found(e):
+    # Debug: Print all active routes
+    output = "<h1>404 - Not Found</h1><p>Active Routes:</p><ul>"
+    for rule in app.url_map.iter_rules():
+        output += f"<li>{rule}</li>"
+    output += "</ul>"
+    return output, 404
+
 @app.route('/design_gallery')
 def design_gallery():
     return render_template('design_gallery.html')
@@ -98,6 +107,10 @@ sim_thread.start()
 @app.route('/')
 def landing():
     return render_template('landing.html')
+
+@app.route('/health')
+def health_check():
+    return "App is Running! V-DEBUG-2"
 
 @app.route('/dashboard')
 def dashboard():
